@@ -20,6 +20,8 @@ public class HistorialDispositivos {
     private Status status;
     @Column(nullable = false )
     private LocalDateTime fecha_hora;
+    @Column(length = 15)
+    private String ip_dispositivo;
     @ManyToOne @JoinColumn(name = "conectado_a", nullable = false)
     private Dispositivos conectado;
 

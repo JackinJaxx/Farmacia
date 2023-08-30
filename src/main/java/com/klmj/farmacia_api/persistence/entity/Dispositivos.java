@@ -12,4 +12,8 @@ public class Dispositivos {
     private String tipo;
     @Column(length = 100, nullable = false)
     private String nombre;
+    @Column( length = 35, unique = true)
+    private String mac_addres;
+
+
 }
