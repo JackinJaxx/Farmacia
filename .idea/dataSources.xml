@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="erwin@localhost" uuid="2f56f2a1-bc35-4790-880d-5b01676c1bf7">
+    <data-source source="LOCAL" name="ridi@localhost" uuid="f182e721-d86d-4baf-b35c-dbc68a59b89b">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
+      <remarks>rididb</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/erwin</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5433/ridi</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
+      </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

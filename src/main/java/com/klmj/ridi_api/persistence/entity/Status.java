@@ -1,4 +1,4 @@
-package com.klmj.farmacia_api.persistence.entity;
+package com.klmj.ridi_api.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,8 +6,10 @@ import lombok.*;
 @Entity(name = "status")
 @Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
 public class Status {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_status;
+    @Id
+    @Column(name = "id_status")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(length = 10, nullable = false)
-    private String descripcion_status;
+    private String descripcion;
 }

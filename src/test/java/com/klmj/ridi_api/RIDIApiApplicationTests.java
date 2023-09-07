@@ -1,10 +1,10 @@
-package com.klmj.farmacia_api;
+package com.klmj.ridi_api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FarmaciaApiApplicationTests {
+class RIDIApiApplicationTests {
 
     @Test
     void contextLoads() {
