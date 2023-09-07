@@ -1,0 +1,14 @@
+/target/classes/com/klmj/ridi_api/persistence/entity/Dispositivo.class
+/target/classes/com/klmj/ridi_api/persistence/entity/Estado.class
+/target/classes/com/klmj/ridi_api/persistence/repository/EstadoRepository.class
+/target/classes/com/klmj/ridi_api/persistence/entity/HistorialDispositivo.class
+/target/classes/com/klmj/ridi_api/persistence/entity/Locacion.class
+/target/classes/com/klmj/ridi_api/persistence/entity/Municipio.class
+/target/classes/com/klmj/ridi_api/controller/MunicipioController.class
+/target/classes/com/klmj/ridi_api/persistence/repository/MunicipioRepository.class
+/target/classes/com/klmj/ridi_api/controller/PersistenceController.class
+/target/classes/com/klmj/ridi_api/RIDIApiApplication.class
+/target/test-classes/com/klmj/ridi_api/RIDIApiApplicationTests.class
+/target/classes/com/klmj/ridi_api/ServletInitializer.class
+/target/classes/com/klmj/ridi_api/persistence/entity/Status.class
+/target/classes/com/klmj/ridi_api/persistence/entity/TipoDispositivo.class
