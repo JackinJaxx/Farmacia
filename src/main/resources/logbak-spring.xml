@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Configura la salida de registro a un archivo -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/myapp.log</file> <!-- Ruta y nombre del archivo de registro -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Configura el nivel de registro para diferentes paquetes o clases -->
+    <logger name="com.example" level="DEBUG" />
+    <logger name="org.springframework" level="INFO" />
+
+    <!-- Configura el nivel de registro predeterminado para el resto de las clases -->
+    <root level="INFO">
+        <appender-ref ref="FILE" /> <!-- Asocia el appender FILE a la raíz del registro -->
+    </root>
+</configuration>

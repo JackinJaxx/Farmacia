@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from rep -->
     </parent>
     <groupId>com.KLMJ</groupId>
-    <artifactId>Farmacia_API</artifactId>
+    <artifactId>RIDI_API</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Farmacia_API</name>

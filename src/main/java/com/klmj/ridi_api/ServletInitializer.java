@@ -10,5 +10,4 @@ public class ServletInitializer extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(@NotNull SpringApplicationBuilder application) {
         return application.sources(RIDIApiApplication.class);
     }
-
 }
