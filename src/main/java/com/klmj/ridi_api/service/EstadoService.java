@@ -11,4 +11,6 @@ public class EstadoService extends PersistenceService<Estado, Long> {
     public EstadoService(EstadoRepository repository) {
         super(repository);
     }
+
+
 }

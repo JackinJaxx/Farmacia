@@ -1,5 +1,6 @@
 package com.klmj.ridi_api.persistence.entity;
 
+import com.klmj.ridi_api.persistence.entity.enumeration.TipoDispositivos;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,17 +21,16 @@ import lombok.*;
 @Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
 public class Dispositivo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer num_serie;
-    @OneToOne
-    @JoinTable(name = "id_tipo")
-    private TipoDispositivo tipo;
+    @Column(name = "id_dispositivo")
+    private String id;
+    @Enumerated(EnumType.STRING)
+    private TipoDispositivos tipo;
     @Column(name = "nombre_dispositivo", length = 35, nullable = false)
     private String nombreDispositivo;
     @Column(length = 100)
     private String descripcion;
     @Column(length = 35)
-    private String marca;
+    private String fabricante;
     @Column(name = "sistema_operativo", length = 20)
     private String sistemaOperativo;
 }

@@ -25,6 +25,8 @@ public class Locacion {
     private String nombre;
     @Column(nullable = false , length = 50)
     private String direccion;
+    @Column(name = "ip_locacion", length = 15)
+    private String ip;
     @ManyToOne
     @JoinColumn(name = "id_municipio", nullable = false)
     private Municipio municipio;

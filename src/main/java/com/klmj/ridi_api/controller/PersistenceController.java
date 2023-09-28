@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Kevin Alejandro Francisco Gonzalez
@@ -28,13 +29,36 @@ public abstract class PersistenceController<T, ID> {
     }
 
     @PostMapping
-    public abstract ResponseEntity<T> guardar(@RequestBody T t);
+    public ResponseEntity<T> guardar(@RequestBody T t) {
+        T entitySaved = service.guardar(t);
+
+        return new ResponseEntity<>(entitySaved, HttpStatus.OK);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<T> leerPorID(@PathVariable("id") ID id) {
+        Optional<T> entityRead = service.leerPorID(id);
+
+        return entityRead
+                .map(e -> new ResponseEntity<>(e, HttpStatus.FOUND))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    /*
+    @GetMapping("/leer/{entity}")
+    public ResponseEntity<List<T>> leer(@PathVariable("entity") T t) {
+        List<T> entitiesRead = service.leer(t);
+        return new ResponseEntity<>(entitiesRead, HttpStatus.OK);
+    }*/
+
     @GetMapping
-    public abstract ResponseEntity<T> leerPorID(ID id);
-    @PostMapping
-    public abstract ResponseEntity<List<T>> leer(T t);
-    @GetMapping
-    public abstract ResponseEntity<List<T>> leerTodos();
-    @DeleteMapping
-    public abstract ResponseEntity<HttpStatus> borrar(ID id);
+    public ResponseEntity<List<T>> leerTodos() {
+        return new ResponseEntity<>(service.leerTodos(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> borrar(@PathVariable("id") ID id) {
+        boolean result = service.borrar(id);
+        return new ResponseEntity<>(result ? HttpStatus.OK : HttpStatus.NOT_MODIFIED);
+    }
 }

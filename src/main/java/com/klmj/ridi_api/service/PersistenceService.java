@@ -1,5 +1,6 @@
 package com.klmj.ridi_api.service;
 
+import lombok.Getter;
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -15,7 +16,7 @@ import java.util.Optional;
  * @param <T> la entidad
  * @param <ID> el tipo de dato de la llave primaria
  */
-
+@Getter
 public abstract class PersistenceService <T, ID> {
 
     protected final JpaRepository<T, ID> repository;

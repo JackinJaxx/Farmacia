@@ -1,6 +1,7 @@
 package com.klmj.ridi_api.controller;
 
 import com.klmj.ridi_api.persistence.entity.Municipio;
+import com.klmj.ridi_api.service.MunicipioService;
 import com.klmj.ridi_api.service.PersistenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,16 +12,16 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("municipios")
+@RequestMapping("/municipios")
 public class MunicipioController extends PersistenceController<Municipio, Long> {
 
     @Autowired
-    public MunicipioController(PersistenceService<Municipio, Long> service) {
+    public MunicipioController(MunicipioService service) {
         super(service);
     }
 
     @Override
-    @PostMapping("/guardar")
+    @PostMapping("")
     public ResponseEntity<Municipio> guardar(@RequestBody Municipio municipio) {
         Municipio municipioGuardado = service.guardar(municipio);
 
@@ -37,35 +38,5 @@ public class MunicipioController extends PersistenceController<Municipio, Long> 
                     .formatted(e.getMessage()));
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
-
-    @Override
-    @GetMapping("/leer-id{id_municipio}")
-    public ResponseEntity<Municipio> leerPorID(@PathVariable Long id_municipio) {
-        Optional<Municipio> municipioLeido = service.leerPorID(id_municipio);
-
-        return municipioLeido
-                .map(m -> new ResponseEntity<>(m, HttpStatus.FOUND))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
-    @Override
-    @PostMapping("/leer")
-    public ResponseEntity<List<Municipio>> leer(@RequestBody Municipio municipio) {
-        List<Municipio> municipiosCapturados = service.leer(municipio);
-        return new ResponseEntity<>(municipiosCapturados, HttpStatus.FOUND);
-    }
-
-    @Override
-    @GetMapping("/leer-todos")
-    public ResponseEntity<List<Municipio>> leerTodos() {
-        return new ResponseEntity<>(service.leerTodos(), HttpStatus.OK);
-    }
-
-    @Override
-    @DeleteMapping("/borrar/{id_municipio}")
-    public ResponseEntity<HttpStatus> borrar(@PathVariable Long id_municipio) {
-        boolean resultado = service.borrar(id_municipio);
-        return new ResponseEntity<>(resultado ? HttpStatus.OK : HttpStatus.NOT_MODIFIED);
     }
 }

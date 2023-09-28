@@ -1,9 +1,13 @@
 package com.klmj.ridi_api.persistence.entity;
 
+import com.klmj.ridi_api.persistence.entity.embedd.HistorialDispositivoPrimaryKey;
+import com.klmj.ridi_api.persistence.entity.enumeration.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author Kevin Alejandro Francisco Gonzalez
@@ -18,24 +22,24 @@ import java.time.LocalDateTime;
 @Entity(name = "historial_dispositivos")
 @Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
 public class HistorialDispositivo {
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "id_dispositivo", nullable = false)
-    private Dispositivo dispositivo;
-    @Id
-    private int cns;
+    @EmbeddedId
+    private HistorialDispositivoPrimaryKey primaryKey;
     @ManyToOne
     @JoinColumn(name = "id_locacion", nullable = false)
     private Locacion locacion;
-    @ManyToOne
-    @JoinColumn(name = "id_status", nullable = false)
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private Status status;
-    @Column(nullable = false )
-    private LocalDateTime fecha_hora;
+    @Column(name = "fecha_hora", nullable = false )
+    private LocalDateTime fechaHora;
     @ManyToOne
-    @JoinColumn(name = "conectado_a", nullable = false)
+    @JoinColumn(name = "conectado_a")
     private Dispositivo conectado;
-    @Column(name = "ip_address", nullable = false)
+    @Column(name = "ip_address")
     private String ipAddress;
+    @Column
+    private String source;
 
+    @OneToMany(mappedBy = "historialDispositivo")
+    private List<Incidencia> incidencias;
 }
