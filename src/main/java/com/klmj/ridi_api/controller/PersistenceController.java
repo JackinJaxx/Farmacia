@@ -44,6 +44,8 @@ public abstract class PersistenceController<T, ID> {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+
+
     /*
     @GetMapping("/leer/{entity}")
     public ResponseEntity<List<T>> leer(@PathVariable("entity") T t) {
