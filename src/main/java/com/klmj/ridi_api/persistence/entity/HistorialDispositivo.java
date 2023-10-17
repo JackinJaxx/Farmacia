@@ -5,7 +5,6 @@ import com.klmj.ridi_api.persistence.entity.enumeration.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
