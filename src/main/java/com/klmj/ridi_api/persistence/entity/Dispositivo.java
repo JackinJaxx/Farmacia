@@ -33,4 +33,8 @@ public class Dispositivo {
     private String fabricante;
     @Column(name = "sistema_operativo", length = 20)
     private String sistemaOperativo;
+    @Column(name = "nombre_sistema", length = 20)
+    private String nombreSistema;
+    @Column(name = "esta_presente", length = 20)
+    private boolean estaPresente;
 }
