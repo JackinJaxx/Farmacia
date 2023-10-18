@@ -21,8 +21,8 @@ import lombok.*;
 @Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
 public class Dispositivo {
     @Id
-    @Column(name = "id_dispositivo")
-    private String id;
+    @Column(name = "numero_serie")
+    private String numero_serie;
     @Enumerated(EnumType.STRING)
     private TipoDispositivos tipo;
     @Column(name = "nombre_dispositivo", length = 35, nullable = false)
