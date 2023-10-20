@@ -2,9 +2,7 @@ package com.klmj.ridi_api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.klmj.ridi_api.persistence.entity.Estado;
 import com.klmj.ridi_api.persistence.entity.HistorialDispositivo;
-import org.hibernate.type.EntityType;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,7 +24,6 @@ public class Main {
                 "\"fechaHora\":\"2023-09-27T00:00:00\"," +
                 "\"ipAddress\":\"192.168.1.1\"," +
                 "\"source\":\"windows event log\"}";
-        //Map<String, Long> variables = new HashMap<>();
         //variables.put("id_estado", 1L);
 
         try {
@@ -46,8 +43,6 @@ public class Main {
         //HttpEntity<Estado> request = new HttpEntity<>(estado, headers);
         HttpEntity<String> request = new HttpEntity<>(entity, headers);
         //HttpEntity<Map<String, String>> request = new HttpEntity<>(Map.of("nombre", "CHIAPAS"), headers);
-
-        Long idEstado = 1L;
 
         // Enviar la solicitud POST
         //ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
