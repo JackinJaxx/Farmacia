@@ -26,11 +26,10 @@ public class Dispositivo {
     @Enumerated(EnumType.STRING)
     private TipoDispositivos tipo;
     @Column(name = "nombre_dispositivo", length = 35, nullable = false)
-    private String nombreDispositivo;
+    private String nombreComputadora;
     @Column(length = 100)
     private String descripcion;
     @Column(length = 35)
     private String fabricante;
-    @Column(name = "sistema_operativo", length = 20)
-    private String sistemaOperativo;
+
 }

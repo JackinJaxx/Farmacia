@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Setter @Getter
 public class HistorialDispositivoPrimaryKey implements Serializable {
     @ManyToOne
-    @JoinColumn(name = "id_dispositivo", nullable = false)
+    @JoinColumn(name = "id_computadora", nullable = false)
     private Dispositivo dispositivo;
     @Column(nullable = false)
     private Integer cns;
