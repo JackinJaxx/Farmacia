@@ -2,7 +2,7 @@ package com.klmj.ridi_api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.klmj.ridi_api.persistence.entity.HistorialDispositivo;
+import com.klmj.ridi_api.persistence.entity.HistorialComputadora;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,10 +31,10 @@ public class Main {
             objectMapper.registerModule(new JavaTimeModule()); // Registrar el módulo JavaTime
 
 
-            HistorialDispositivo historialDispositivo = objectMapper.readValue(entity, HistorialDispositivo.class);
+            HistorialComputadora historialComputadora = objectMapper.readValue(entity, HistorialComputadora.class);
 
             // El objeto se ha creado correctamente
-            System.out.println("Objeto HistorialDispositivo creado: " + historialDispositivo);
+            System.out.println("Objeto HistorialDispositivo creado: " + historialComputadora);
 
         } catch (Exception r) {
             System.out.println(r.getMessage());

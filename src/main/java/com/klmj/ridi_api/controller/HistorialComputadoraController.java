@@ -1,26 +1,28 @@
 package com.klmj.ridi_api.controller;
 
-import com.klmj.ridi_api.persistence.entity.HistorialDispositivo;
-import com.klmj.ridi_api.persistence.entity.embedd.HistorialDispositivoPrimaryKey;
-import com.klmj.ridi_api.service.HistorialDispositivoService;
+import com.klmj.ridi_api.persistence.entity.HistorialComputadora;
+import com.klmj.ridi_api.persistence.entity.embedd.HistorialComputadoraPrimaryKey;
+import com.klmj.ridi_api.service.HistorialComputadoraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/historial_dispositivos")
-public class HistorialDispositivosController extends PersistenceController<HistorialDispositivo, HistorialDispositivoPrimaryKey> {
+@RequestMapping("/historial_computadora")
+public class HistorialComputadoraController extends PersistenceController<HistorialComputadora, HistorialComputadoraPrimaryKey> {
     @Autowired
-    public HistorialDispositivosController(HistorialDispositivoService service) {
+    public HistorialComputadoraController(HistorialComputadoraService service) {
         super(service);
     }
 
     @Override
-    public ResponseEntity<HistorialDispositivo> guardar(HistorialDispositivo hd){
+    @PostMapping
+    public ResponseEntity<HistorialComputadora> guardar(HistorialComputadora hd){
         var hdGuardado = super.guardar(hd);
 
         if(Objects.isNull(hdGuardado.getBody()))

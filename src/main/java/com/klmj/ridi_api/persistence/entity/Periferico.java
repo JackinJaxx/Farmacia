@@ -6,10 +6,11 @@ import lombok.*;
 @Entity(name = "perifericos")
 @Getter
 @Setter
+
 public class Periferico {
     @Id
-    private long id_periferico;
     @OneToOne
+    @PrimaryKeyJoinColumn(referencedColumnName = "id_dispositivo")
     @JoinColumn(name = "id_dispositivo")
     private Dispositivo dispositivo;
     @ManyToOne

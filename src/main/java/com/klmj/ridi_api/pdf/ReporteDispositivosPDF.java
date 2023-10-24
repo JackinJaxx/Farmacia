@@ -20,9 +20,9 @@ public class ReporteDispositivosPDF extends AbstractPdfView {
         int columnas = 1;
         PdfPTable tablaReportes = new PdfPTable(columnas);
 
-        dispositivoList.forEach(dispositivo -> {
-            tablaReportes.addCell(dispositivo.getId());
+       // dispositivoList.forEach(dispositivo -> {
+          //  tablaReportes.addCell(dispositivo.getId());
             
-        });
+       // });
     }
 }
