@@ -1,16 +1,15 @@
 package com.klmj.ridi_api.controller;
 
 import com.klmj.ridi_api.persistence.entity.Computadora;
+import com.klmj.ridi_api.persistence.entity.DiscoDuro;
 import com.klmj.ridi_api.persistence.entity.Dispositivo;
+import com.klmj.ridi_api.persistence.entity.Estado;
 import com.klmj.ridi_api.service.ComputadoraService;
 import com.klmj.ridi_api.service.DispositivoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -40,6 +39,26 @@ public class ComputadoraController extends PersistenceController<Computadora, Di
             }
         } catch (NullPointerException e) {
             logger.info("ocurrió un error inesperado %s".formatted(e.getMessage()));
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Computadora> leerPorId(@PathVariable Dispositivo id) {
+        Computadora computadora = super.leerPorID(id).getBody();
+        try{
+            if (computadora != null) {
+                logger.info("Computadora %s obtenida correctamente".formatted(computadora.getId()));
+                return new ResponseEntity<>(computadora, HttpStatus.FOUND);
+            } else {
+                logger.info("La computadora: %s NO ha sido encontrado en la base de datos"
+                        .formatted(computadora.getId()));
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (NullPointerException f){
+            logger.info("ocurrió un error inesperado %s"
+                    .formatted(f.getMessage()));
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
