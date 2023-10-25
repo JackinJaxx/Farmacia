@@ -1,8 +1,9 @@
 package com.klmj.ridi_api.persistence.entity;
 
-import com.klmj.ridi_api.persistence.entity.enumeration.TipoDispositivos;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 /**
  * @author Kevin Alejandro Francisco Gonzalez
@@ -21,20 +22,14 @@ import lombok.*;
 @Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
 public class Dispositivo {
     @Id
-    @Column(name = "numero_serie")
-    private String numero_serie;
-    @Enumerated(EnumType.STRING)
-    private TipoDispositivos tipo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_dispositivo")
+    private Long id;
     @Column(name = "nombre_dispositivo", length = 35, nullable = false)
-    private String nombreDispositivo;
-    @Column(length = 100)
     private String descripcion;
     @Column(length = 35)
     private String fabricante;
-    @Column(name = "sistema_operativo", length = 20)
-    private String sistemaOperativo;
-    @Column(name = "nombre_sistema", length = 20)
-    private String nombreSistema;
-    @Column(name = "esta_presente", length = 20)
-    private boolean estaPresente;
+    @OneToMany(mappedBy = "historialDispositivo")
+    private List<Incidencia> incidencias;
+
 }

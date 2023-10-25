@@ -1,12 +1,10 @@
 package com.klmj.ridi_api.persistence.entity;
 
-import com.klmj.ridi_api.persistence.entity.embedd.HistorialDispositivoPrimaryKey;
-import com.klmj.ridi_api.persistence.entity.enumeration.Status;
+import com.klmj.ridi_api.persistence.entity.embedd.HistorialComputadoraPrimaryKey;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @author Kevin Alejandro Francisco Gonzalez
@@ -18,27 +16,22 @@ import java.util.List;
  * por un periférico a otros dispositivos, con cuáles, así como la dirección ip que tuvo, por último
  * contiene la fecha y hora de cuando se guarde este registro.
  */
-@Entity(name = "historial_dispositivos")
+@Entity(name = "historial_computadora")
 @Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
-public class HistorialDispositivo {
+public class HistorialComputadora {
     @EmbeddedId
-    private HistorialDispositivoPrimaryKey primaryKey;
+    private HistorialComputadoraPrimaryKey primaryKey;
     @ManyToOne
     @JoinColumn(name = "id_locacion", nullable = false)
     private Locacion locacion;
-    @Column(name = "status")
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "id_status", nullable = false)
     private Status status;
     @Column(name = "fecha_hora", nullable = false )
     private LocalDateTime fechaHora;
-    @ManyToOne
-    @JoinColumn(name = "conectado_a")
-    private Dispositivo conectado;
     @Column(name = "ip_address")
     private String ipAddress;
-    @Column
-    private String source;
+    @Column(name = "en_linea")
+    private String enLinea;
 
-    @OneToMany(mappedBy = "historialDispositivo")
-    private List<Incidencia> incidencias;
 }

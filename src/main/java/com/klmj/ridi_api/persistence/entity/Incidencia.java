@@ -24,21 +24,20 @@ public class Incidencia {
     @Id
     @Column(name = "id_incidencia", nullable = false)
     private Integer id;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "encargados_incidencia",
             joinColumns = @JoinColumn(name = "incidencia"),
             inverseJoinColumns = @JoinColumn(name = "encargado")
     )
+
     private Set<Usuario> encargados = new HashSet<>();
     @Column
     private String descripcion;
     @Column(name = "fecha_solucion")
     private LocalDateTime fechaSolucion;
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "id_dispositivo", referencedColumnName = "id_dispositivo"),
-            @JoinColumn(name = "cns", referencedColumnName = "cns")
-    })
-    private HistorialDispositivo historialDispositivo;
+    @JoinColumn(name = "id_dispositivo", referencedColumnName = "id_dispositivo")
+    private Dispositivo historialDispositivo;
 }
