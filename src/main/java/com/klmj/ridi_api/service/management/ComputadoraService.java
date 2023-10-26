@@ -1,7 +1,8 @@
-package com.klmj.ridi_api.service;
+package com.klmj.ridi_api.service.management;
 
 import com.klmj.ridi_api.persistence.entity.management.Computadora;
-import com.klmj.ridi_api.persistence.repository.ComputadoraRepository;
+import com.klmj.ridi_api.persistence.repository.management.ComputadoraRepository;
+import com.klmj.ridi_api.service.PersistenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

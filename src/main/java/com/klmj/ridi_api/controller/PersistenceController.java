@@ -63,7 +63,7 @@ public abstract class PersistenceController<T, ID> {
 
     @GetMapping
     public ResponseEntity<List<T>> leerTodos() {
-        logger.info("Petición Get a las %s".formatted(LocalDateTime.now()));
+        //logger.info("Petición Get a las %s".formatted(LocalDateTime.now()));
 
         return new ResponseEntity<>(service.leerTodos(), HttpStatus.FOUND);
     }

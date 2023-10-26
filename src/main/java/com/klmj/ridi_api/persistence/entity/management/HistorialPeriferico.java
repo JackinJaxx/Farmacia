@@ -32,7 +32,7 @@ public class HistorialPeriferico {
     private Periferico periferico;
     @Id
     @Column(name = "cns", nullable = false)
-    private String cns;
+    private Integer cns;
     @Column(name = "fecha_registro", nullable = false)
     private LocalDateTime fechaRegistro;
     @Column(name = "estatus", nullable = false)

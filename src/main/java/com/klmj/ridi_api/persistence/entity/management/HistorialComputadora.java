@@ -18,12 +18,12 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"fechaRegistro", "estatus", "ipAddress", "enLinea", "locacion"})
 
 @Entity(name = "historial_computadora")
+@Table
 @IdClass(HistorialComputadoraId.class)
 public class HistorialComputadora {
     @Id
@@ -32,7 +32,7 @@ public class HistorialComputadora {
     private Computadora computadora;
     @Id
     @Column(name = "cns", nullable = false)
-    private String cns;
+    private Integer cns;
     @Column(name = "fecha_registro", nullable = false )
     private LocalDateTime fechaRegistro;
     @Column(name = "estatus", nullable = false)

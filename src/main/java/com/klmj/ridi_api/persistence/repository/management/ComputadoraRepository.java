@@ -1,4 +1,4 @@
-package com.klmj.ridi_api.persistence.repository;
+package com.klmj.ridi_api.persistence.repository.management;
 
 import com.klmj.ridi_api.persistence.entity.management.Computadora;
 import org.springframework.data.jpa.repository.JpaRepository;
