@@ -3,8 +3,14 @@ package com.klmj.ridi_api.persistence.entity.location;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(exclude = {"nombre", "estado"})
+
 @Entity(name = "municipios")
-@Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
 public class Municipio {
     @Id
     @Column(nullable = false, name = "id_municipio")

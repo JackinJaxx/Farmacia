@@ -1,10 +1,10 @@
 package com.klmj.ridi_api.controller.management;
 
 import com.klmj.ridi_api.controller.PersistenceController;
+import com.klmj.ridi_api.persistence.entity.management.Computadora;
 import com.klmj.ridi_api.persistence.entity.management.HistorialComputadora;
 import com.klmj.ridi_api.persistence.entity.management.embedd.HistorialComputadoraId;
 import com.klmj.ridi_api.service.management.HistorialComputadoraService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,16 +17,16 @@ public class HistorialComputadoraController
         extends PersistenceController<HistorialComputadora, HistorialComputadoraId> {
     protected HistorialComputadoraService service;
 
-    @Autowired
     public HistorialComputadoraController(HistorialComputadoraService service) {
         super(service);
         this.service = service;
     }
 
     @Override
-    @GetMapping("/id")
-    public ResponseEntity<HistorialComputadora> leerPorID(@RequestBody HistorialComputadoraId historialComputadoraId) {
-        return super.leerPorID(historialComputadoraId);
+    @PostMapping("/por-historial")
+    public ResponseEntity<HistorialComputadora> guardar(HistorialComputadora historialComputadora) {
+        System.out.println("GUARDANDO POR HISTORIAL");
+        return super.guardar(historialComputadora);
     }
 
     @GetMapping("/{serial}")

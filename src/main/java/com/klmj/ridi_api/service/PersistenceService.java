@@ -1,6 +1,8 @@
 package com.klmj.ridi_api.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -32,9 +34,13 @@ public abstract class PersistenceService <T,ID> {
      * @return un nuevo objeto de la misma instancia de la tabla, incluyendo una id en caso de
      * generarse automáticamente.
      */
-    public T guardar(T t) {
-        if (repository.exists(Example.of(t))) return null;
+    public T guardar(@NotNull T t) {
+        //if (repository.exists(Example.of(t))) return null;
         return repository.save(t);
+    }
+
+    public List<T> guardar(@NotNull List<T> ts) {
+        return ts.stream().map(this::guardar).toList();
     }
 
     /**
@@ -42,7 +48,7 @@ public abstract class PersistenceService <T,ID> {
      * @param id el valor de la id a filtrar.
      * @return Optional con la instancia que se encontró.
      */
-    public Optional<T> leerPorID(ID id) {
+    public Optional<T> leerPorID(@NotNull ID id) {
         return repository.findById(id);
     }
 
@@ -59,8 +65,8 @@ public abstract class PersistenceService <T,ID> {
      * @param t el objeto a actualizar.
      * @return verdadero en caso de no haber ningún problema, al contrario devuelve falso.
      */
-    public boolean actualizar(T t) {
-        if (!repository.exists(Example.of(t))) return false;
+    public boolean actualizar(@NotNull T t) {
+        if (repository.exists(Example.of(t))) return false;
         repository.save(t);
         return true;
     }
@@ -70,8 +76,17 @@ public abstract class PersistenceService <T,ID> {
      * @param id la id a filtrar.
      * @return verdadero en caso de no haber ningún problema, al contrario devuelve falso.
      */
-    public boolean borrar(ID id) {
+    public boolean borrar(@NotNull ID id) {
         repository.deleteById(id);
         return repository.findById(id).isEmpty();
+    }
+
+    public boolean siExiste(@NotNull T t) {
+        try {
+            return repository.exists(Example.of(t));
+        } catch (EntityNotFoundException ex) {
+            System.out.printf("%n**%s no encontrado**%n%n", t);
+            return false;
+        }
     }
 }

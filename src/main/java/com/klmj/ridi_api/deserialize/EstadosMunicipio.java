@@ -1,4 +1,4 @@
-package com.klmj.ridi_api;
+package com.klmj.ridi_api.deserialize;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
@@ -7,16 +7,20 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Es una clase que contiene todos los municipios de la república Mexicana, por cada estado hay
+ * una lista de cadena con los municipios que hay.
+ */
 @NoArgsConstructor
 @AllArgsConstructor
-public class MunicipioPrueba implements Serializable {
+public class EstadosMunicipio implements Serializable {
     public List<String> Aguascalientes;
     @JsonAlias("Baja California")
-    public List<String> bajaCalifornia;
+    public List<String> BajaCalifornia;
     @JsonAlias("Baja California Sur")
-    public List<String> bajaCaliforniaSur;
+    public List<String> BajaCaliforniaSur;
     @JsonAlias("Campeche")
-    public List<String> campeche;
+    public List<String> Campeche;
     public List<String> Coahuila;
     public List<String> Colima;
     public List<String> Chiapas;

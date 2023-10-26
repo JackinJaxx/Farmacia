@@ -1,21 +1,12 @@
 package com.klmj.ridi_api;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.klmj.ridi_api.persistence.entity.location.Estado;
-import com.klmj.ridi_api.persistence.entity.location.Municipio;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        // Ruta del archivo en la unidad C
+        /*// Ruta del archivo en la unidad C
         String filePath = "D:\\GitHub\\RIDI_API\\src\\main\\resources\\data_master\\";
 
         try {
@@ -31,7 +22,7 @@ public class Main {
             scanner.close();
 
             ObjectMapper objectMapper = new ObjectMapper();
-            MunicipioPrueba municipioPrueba = objectMapper.readValue(fileM, MunicipioPrueba.class);
+            EstadosMunicipio municipioPrueba = objectMapper.readValue(fileM, EstadosMunicipio.class);
             List<Estado> estados = objectMapper.readValue(fileE, new TypeReference<List<Estado>>() {});
 
             List<Municipio> municipios = new ArrayList<>();
@@ -47,7 +38,7 @@ public class Main {
 
         } catch (Exception e) {
             System.out.println("El archivo no se pudo encontrar: " + e.getMessage());
-        }
+        }*/
     }
 }
 

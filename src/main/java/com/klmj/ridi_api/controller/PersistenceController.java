@@ -69,17 +69,10 @@ public abstract class PersistenceController<T, ID> {
     }
 
     @PutMapping
-    public ResponseEntity<String> actualizar(@RequestBody T t) {
+    public Boolean actualizar(@RequestBody T t) {
         logger.info("Petición Put a las %s".formatted(LocalDateTime.now()));
 
-        boolean result = service.actualizar(t);
-
-        if (result)
-            return new ResponseEntity<>(
-                    "instancia actualizada correctamente", HttpStatus.FOUND);
-        return new ResponseEntity<>(
-                "no hay instancia que coincidan para %s"
-                        .formatted(t), HttpStatus.NOT_MODIFIED);
+        return service.actualizar(t);
     }
 
     @DeleteMapping("/{id}")
