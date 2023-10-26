@@ -3,8 +3,7 @@ package com.klmj.ridi_api.persistence.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Kevin Alejandro Francisco Gonzalez
@@ -12,29 +11,37 @@ import java.util.Set;
  * @author Mauricio Betancourt Mora
  * @author Luis Hurtado Gomez
  * @version 1.0
+ * Es un usuario que tiene acceso al aplicativo, con sus respectivos permisos.
  */
-@Entity(name = "usuarios")
+
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = {"correo", "no_telefono", "nombres", "apellido_p", "apellido_m", "password", "grupo", "incidencias"})
+
+@Entity(name = "usuarios")
 public class Usuario {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario", nullable = false)
-    private String id_usuario;
+    private Long id;
     @Column(name = "correo_electronico", nullable = false)
-    private String correo_electronico;
-    @Column(name = "no telefono", nullable = false)
+    private String correo;
+    @Column(name = "no_telefono", nullable = false)
     private String no_telefono;
-    @Column(name = "nombre_usuario", nullable = false)
-    private String nombre;
+    @Column(name = "nombres", nullable = false)
+    private String nombres;
     @Column(name = "apellido_p", nullable = false)
     private String apellido_p;
     @Column(name = "apellido_m", nullable = false)
     private String apellido_m;
-    @Column(name = "passwd", nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
-    @ManyToMany(mappedBy = "encargados", fetch = FetchType.LAZY)
-    private Set<Incidencia> incidencias = new HashSet<>();
+    @Enumerated(EnumType.STRING)
+    private Grupo grupo;
+
+    @ManyToMany(mappedBy = "encargados")
+    private List<Incidencia> incidencias;
 }

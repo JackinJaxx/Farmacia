@@ -13,11 +13,12 @@ import java.util.Optional;
  * @author Mauricio Betancourt Mora
  * @author Luis Hurtado Gomez
  * @version 1.0
- * @param <T> la entidad
- * @param <ID> el tipo de dato de la llave primaria
+ * Un servicio con los métodos CRUD básicos implementados.
+ * @param <T> instancia de la @Entity class.
+ * @param <ID> el tipo de dato de la @Id class.
  */
 @Getter
-public abstract class PersistenceService <T, ID> {
+public abstract class PersistenceService <T,ID> {
 
     protected final JpaRepository<T, ID> repository;
 
@@ -25,31 +26,50 @@ public abstract class PersistenceService <T, ID> {
         this.repository = repository;
     }
 
-    /*public abstract T guardar(@RequestBody T t);
-    public abstract Optional<T> leerPorID(@PathVariable ID id);
-    public abstract List<T> leer(@PathVariable T t);
-    public abstract List<T> leerTodos();
-    public abstract boolean borrar(@PathVariable ID id);*/
-
-
     /**
-     * Guarda y actualiza la entidad T
-     * @param t el objeto a guardar
-     * @return el nuevo objeto, si se está creando con una nueva id, retorna el objeto con la id
-     * generada
+     * Guarda un objeto en la base de datos si no existe
+     * @param t el objeto a guardar.
+     * @return un nuevo objeto de la misma instancia de la tabla, incluyendo una id en caso de
+     * generarse automáticamente.
      */
     public T guardar(T t) {
+        if (repository.exists(Example.of(t))) return null;
         return repository.save(t);
     }
+
+    /**
+     * Busca en la base de datos un objeto que coincida con una id.
+     * @param id el valor de la id a filtrar.
+     * @return Optional con la instancia que se encontró.
+     */
     public Optional<T> leerPorID(ID id) {
         return repository.findById(id);
     }
-    public List<T> leer(T t) {
-        return repository.findAll(Example.of(t));
-    }
+
+    /**
+     * Obtiene todas las instancias que se encuentren en la base de datos.
+     * @return un List, estará vacío en caso de no encontrar nada.
+     */
     public List<T> leerTodos() {
         return repository.findAll();
     }
+
+    /**
+     * Actualiza una instancia en la base de datos en caso de estar ya guardada.
+     * @param t el objeto a actualizar.
+     * @return verdadero en caso de no haber ningún problema, al contrario devuelve falso.
+     */
+    public boolean actualizar(T t) {
+        if (!repository.exists(Example.of(t))) return false;
+        repository.save(t);
+        return true;
+    }
+
+    /**
+     * Borra una instancia en la base de datos filtrando por una id.
+     * @param id la id a filtrar.
+     * @return verdadero en caso de no haber ningún problema, al contrario devuelve falso.
+     */
     public boolean borrar(ID id) {
         repository.deleteById(id);
         return repository.findById(id).isEmpty();

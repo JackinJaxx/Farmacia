@@ -1,6 +1,6 @@
 package com.klmj.ridi_api.pdf;
 
-import com.klmj.ridi_api.persistence.entity.Dispositivo;
+import com.klmj.ridi_api.persistence.entity.management.Dispositivo;
 import com.lowagie.text.pdf.PdfPTable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

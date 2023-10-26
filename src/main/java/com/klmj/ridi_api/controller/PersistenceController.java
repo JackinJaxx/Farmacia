@@ -1,14 +1,17 @@
 package com.klmj.ridi_api.controller;
 
 import com.klmj.ridi_api.service.PersistenceService;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Unmodifiable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 
 /**
  * @author Kevin Alejandro Francisco Gonzalez
@@ -16,12 +19,20 @@ import java.util.Optional;
  * @author Mauricio Betancourt Mora
  * @author Luis Hurtado Gomez
  * @version 1.0
- * @param <T> es la entidad de persistencia a la que haremos referencia
- * @param <ID> el tipo de dato de su llave primaria
+ * Un controlador con los métodos CRUD básicos implementados.
+ * @param <T> instancia de la @Entity class.
+ * @param <ID> el tipo de dato de la @Id class.
  */
 public abstract class PersistenceController<T, ID> {
     protected final PersistenceService<T, ID> service;
     protected final Logger logger;
+
+    @Contract("_, _ -> new")
+    static @NotNull @Unmodifiable Map<String, String> makeResponse(
+            String message,
+            @NotNull HttpStatus status) {
+        return Map.of("message", message, "status", status.toString());
+    }
 
     public PersistenceController(PersistenceService<T, ID> service) {
         this.service = service;
@@ -30,13 +41,19 @@ public abstract class PersistenceController<T, ID> {
 
     @PostMapping
     public ResponseEntity<T> guardar(@RequestBody T t) {
+        logger.info("Petición Post a las %s".formatted(LocalDateTime.now()));
+
         T entitySaved = service.guardar(t);
 
+        if (Objects.isNull(entitySaved))
+            return new ResponseEntity<>(t, HttpStatus.NOT_MODIFIED);
         return new ResponseEntity<>(entitySaved, HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<T> leerPorID(@PathVariable("id") ID id) {
+        logger.info("Petición Get a las %s".formatted(LocalDateTime.now()));
+
         Optional<T> entityRead = service.leerPorID(id);
 
         return entityRead
@@ -44,23 +61,42 @@ public abstract class PersistenceController<T, ID> {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-
-
-    /*
-    @GetMapping("/leer/{entity}")
-    public ResponseEntity<List<T>> leer(@PathVariable("entity") T t) {
-        List<T> entitiesRead = service.leer(t);
-        return new ResponseEntity<>(entitiesRead, HttpStatus.OK);
-    }*/
-
     @GetMapping
     public ResponseEntity<List<T>> leerTodos() {
-        return new ResponseEntity<>(service.leerTodos(), HttpStatus.OK);
+        logger.info("Petición Get a las %s".formatted(LocalDateTime.now()));
+
+        return new ResponseEntity<>(service.leerTodos(), HttpStatus.FOUND);
+    }
+
+    @PutMapping
+    public ResponseEntity<Map<String, String>> actualizar(@RequestBody T t) {
+        logger.info("Petición Put a las %s".formatted(LocalDateTime.now()));
+
+        boolean result = service.actualizar(t);
+
+        if (result)
+            return new ResponseEntity<>(makeResponse(
+                    "instancia actualizada correctamente", HttpStatus.FOUND),
+                    HttpStatus.OK);
+        return new ResponseEntity<>(makeResponse(
+                "no hay instancia que coincidan para %s"
+                        .formatted(t), HttpStatus.NOT_MODIFIED),
+                HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> borrar(@PathVariable("id") ID id) {
+    public ResponseEntity<Map<String, String>> borrar(@PathVariable("id") ID id) {
+        logger.info("Petición Delete a las %s".formatted(LocalDateTime.now()));
+
         boolean result = service.borrar(id);
-        return new ResponseEntity<>(result ? HttpStatus.OK : HttpStatus.NOT_MODIFIED);
+
+        if (result)
+            return new ResponseEntity<>(makeResponse(
+                    "instancia borrada correctamente", HttpStatus.FOUND),
+                    HttpStatus.OK);
+        return new ResponseEntity<>(makeResponse(
+                "no hay instancia que coincidan con el id %s"
+                        .formatted(id), HttpStatus.NOT_MODIFIED),
+                HttpStatus.OK);
     }
 }

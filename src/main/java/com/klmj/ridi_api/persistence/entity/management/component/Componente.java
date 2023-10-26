@@ -1,0 +1,35 @@
+package com.klmj.ridi_api.persistence.entity.management.component;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+/**
+ * @author Kevin Alejandro Francisco Gonzalez
+ * @author Jose Alejandro Perez Chavez
+ * @author Mauricio Betancourt Mora
+ * @author Luis Hurtado Gomez
+ * @version 1.0
+ * Representa un componente electrónico; es un dispositivo que forma parte de un circuito
+ * electrónico.
+ */
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(exclude = {"fabricante", "modelo"})
+
+@Entity(name = "componentes")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Componente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long serial;
+    @Column(name = "no_serie", nullable = false)
+    private String noSerie;
+    @Column
+    private String fabricante;
+    @Column
+    private String modelo;
+}

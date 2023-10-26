@@ -1,8 +1,5 @@
 package com.klmj.ridi_api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.klmj.ridi_api.persistence.entity.HistorialComputadora;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,21 +9,16 @@ public class Main {
         RestTemplate restTemplate = new RestTemplate();
 
         // URL del controlador donde deseas enviar la solicitud POST
-        String url = "http://localhost:8080/historial_dispositivos"; // Ajusta la URL según tu configuración
+        String url = "http://localhost:8080/dispotivos/computadoras/{id}"; // Ajusta la URL según tu configuración
 
         // Crear un objeto que represente el cuerpo de la solicitud (objeto JSON)
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        String entity = "{\"primaryKey\":{\"dispositivo\":{\"id\":\"VIO:91na12121\"},\"cns\":1}," +
-                "\"locacion\":{\"id\":1}," +
-                "\"status\":\"CONECTADO\"," +
-                "\"fechaHora\":\"2023-09-27T00:00:00\"," +
-                "\"ipAddress\":\"192.168.1.1\"," +
-                "\"source\":\"windows event log\"}";
+        String entity = "{\"dispositivoID\":{\"serial\":1}}";
         //variables.put("id_estado", 1L);
 
-        try {
+        /*try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.registerModule(new JavaTimeModule()); // Registrar el módulo JavaTime
 
@@ -38,7 +30,7 @@ public class Main {
 
         } catch (Exception r) {
             System.out.println(r.getMessage());
-        }
+        }*/
 
         //HttpEntity<Estado> request = new HttpEntity<>(estado, headers);
         HttpEntity<String> request = new HttpEntity<>(entity, headers);
@@ -47,10 +39,10 @@ public class Main {
         // Enviar la solicitud POST
         //ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
         // Leer todas las entidades con GET
-        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+        restTemplate.delete(url, entity);
         //ResponseEntity<String> response = restTemplate.getForEntity(url, String.class, entity);
 
-        System.out.println("Respuesta del servidor: " + response.getBody());
+        //System.out.println("Respuesta del servidor: " + response.getBody());
     }
 }
 
