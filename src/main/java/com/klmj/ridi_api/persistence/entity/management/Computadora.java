@@ -26,7 +26,6 @@ public class Computadora extends Dispositivo {
     private String modelo;
     @Column(name = "ip_address")
     private String ipAddress;
-
     @OneToMany(mappedBy = "computadora")
     private List<RAM> memoriasRam;
     @OneToMany(mappedBy = "computadora")

@@ -69,34 +69,29 @@ public abstract class PersistenceController<T, ID> {
     }
 
     @PutMapping
-    public ResponseEntity<Map<String, String>> actualizar(@RequestBody T t) {
+    public ResponseEntity<String> actualizar(@RequestBody T t) {
         logger.info("Petición Put a las %s".formatted(LocalDateTime.now()));
 
         boolean result = service.actualizar(t);
 
         if (result)
-            return new ResponseEntity<>(makeResponse(
-                    "instancia actualizada correctamente", HttpStatus.FOUND),
-                    HttpStatus.OK);
-        return new ResponseEntity<>(makeResponse(
+            return new ResponseEntity<>(
+                    "instancia actualizada correctamente", HttpStatus.FOUND);
+        return new ResponseEntity<>(
                 "no hay instancia que coincidan para %s"
-                        .formatted(t), HttpStatus.NOT_MODIFIED),
-                HttpStatus.OK);
+                        .formatted(t), HttpStatus.NOT_MODIFIED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, String>> borrar(@PathVariable("id") ID id) {
+    public ResponseEntity<String> borrar(@PathVariable("id") ID id) {
         logger.info("Petición Delete a las %s".formatted(LocalDateTime.now()));
 
         boolean result = service.borrar(id);
 
         if (result)
-            return new ResponseEntity<>(makeResponse(
-                    "instancia borrada correctamente", HttpStatus.FOUND),
-                    HttpStatus.OK);
-        return new ResponseEntity<>(makeResponse(
+            return new ResponseEntity<>("instancia borrada correctamente", HttpStatus.FOUND);
+        return new ResponseEntity<>(
                 "no hay instancia que coincidan con el id %s"
-                        .formatted(id), HttpStatus.NOT_MODIFIED),
-                HttpStatus.OK);
+                        .formatted(id), HttpStatus.NOT_MODIFIED);
     }
 }
