@@ -20,7 +20,6 @@ import lombok.*;
 @AllArgsConstructor
 
 @Entity(name = "discos_duros")
-
 @PrimaryKeyJoinColumn(referencedColumnName = "serial", name = "serial_disco_duro")
 public class DiscoDuro extends Componente{
     /**

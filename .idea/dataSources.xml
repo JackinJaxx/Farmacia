@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="psql_ridi" uuid="2fbb9103-f672-43a6-b664-f72194787f76">
+    <data-source source="LOCAL" name="rididb" uuid="2fbb9103-f672-43a6-b664-f72194787f76">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <remarks>rididb</remarks>

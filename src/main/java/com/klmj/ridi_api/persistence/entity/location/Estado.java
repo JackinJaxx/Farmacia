@@ -1,7 +1,10 @@
 package com.klmj.ridi_api.persistence.entity.location;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.io.Serializable;
 
 /**
  * @author Kevin Alejandro Francisco Gonzalez
@@ -20,7 +23,8 @@ public class Estado {
     @Id
     @Column(name = "id_estado")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @JsonAlias("clave")
+    private String id;
     @Column(nullable = false , length = 20, unique = true)
     private String nombre;
 }

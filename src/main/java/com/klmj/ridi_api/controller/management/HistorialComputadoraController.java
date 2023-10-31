@@ -4,6 +4,7 @@ import com.klmj.ridi_api.controller.PersistenceController;
 import com.klmj.ridi_api.persistence.entity.management.HistorialComputadora;
 import com.klmj.ridi_api.persistence.entity.management.embedd.HistorialComputadoraId;
 import com.klmj.ridi_api.service.management.HistorialComputadoraService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ public class HistorialComputadoraController
         extends PersistenceController<HistorialComputadora, HistorialComputadoraId> {
     protected HistorialComputadoraService service;
 
+    @Autowired
     public HistorialComputadoraController(HistorialComputadoraService service) {
         super(service);
         this.service = service;

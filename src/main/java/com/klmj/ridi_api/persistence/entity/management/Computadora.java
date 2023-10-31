@@ -33,6 +33,7 @@ public class Computadora extends Dispositivo {
     @OneToMany(mappedBy = "computadora")
     private List<DiscoDuro> discos;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "computadora")
     private List<HistorialComputadora> historial;
 }

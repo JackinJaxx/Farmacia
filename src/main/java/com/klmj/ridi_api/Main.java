@@ -1,48 +1,53 @@
 package com.klmj.ridi_api;
 
-import org.springframework.http.*;
-import org.springframework.web.client.RestTemplate;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.klmj.ridi_api.persistence.entity.location.Estado;
+import com.klmj.ridi_api.persistence.entity.location.Municipio;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        //Estado estado = new Estado(null, "YUCATAN");
-        RestTemplate restTemplate = new RestTemplate();
 
-        // URL del controlador donde deseas enviar la solicitud POST
-        String url = "http://localhost:8080/dispotivos/computadoras/{id}"; // Ajusta la URL según tu configuración
+    public static void main(String[] args) throws IOException {
+        // Ruta del archivo en la unidad C
+        String filePath = "D:\\GitHub\\RIDI_API\\src\\main\\resources\\data_master\\";
 
-        // Crear un objeto que represente el cuerpo de la solicitud (objeto JSON)
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        try {
+            // Acceder al archivo en la unidad C
+            File fileM = new File(filePath + "estados-municipios.json");
+            File fileE = new File(filePath + "estados.json");
+            Scanner scanner = new Scanner(fileM);
 
-        String entity = "{\"dispositivoID\":{\"serial\":1}}";
-        //variables.put("id_estado", 1L);
+            while (scanner.hasNextLine()) {
+                String data = scanner.nextLine();
+                System.out.println(data);
+            }
+            scanner.close();
 
-        /*try {
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.registerModule(new JavaTimeModule()); // Registrar el módulo JavaTime
+            MunicipioPrueba municipioPrueba = objectMapper.readValue(fileM, MunicipioPrueba.class);
+            List<Estado> estados = objectMapper.readValue(fileE, new TypeReference<List<Estado>>() {});
+
+            List<Municipio> municipios = new ArrayList<>();
+
+            municipioPrueba.Chiapas.forEach(m -> {
+                var est = estados.stream().reduce((e, a) -> (e.getNombre().equals("CHIAPAS")) ? e : a).orElse(new Estado());
+
+                municipios.add(new Municipio(null, m, est));
+            });
+
+            System.out.println(objectMapper.writeValueAsString(municipios));
 
 
-            HistorialComputadora historialComputadora = objectMapper.readValue(entity, HistorialComputadora.class);
-
-            // El objeto se ha creado correctamente
-            System.out.println("Objeto HistorialDispositivo creado: " + historialComputadora);
-
-        } catch (Exception r) {
-            System.out.println(r.getMessage());
-        }*/
-
-        //HttpEntity<Estado> request = new HttpEntity<>(estado, headers);
-        HttpEntity<String> request = new HttpEntity<>(entity, headers);
-        //HttpEntity<Map<String, String>> request = new HttpEntity<>(Map.of("nombre", "CHIAPAS"), headers);
-
-        // Enviar la solicitud POST
-        //ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
-        // Leer todas las entidades con GET
-        restTemplate.delete(url, entity);
-        //ResponseEntity<String> response = restTemplate.getForEntity(url, String.class, entity);
-
-        //System.out.println("Respuesta del servidor: " + response.getBody());
+        } catch (Exception e) {
+            System.out.println("El archivo no se pudo encontrar: " + e.getMessage());
+        }
     }
 }
 
