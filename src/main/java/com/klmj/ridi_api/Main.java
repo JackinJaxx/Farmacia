@@ -1,44 +1,8 @@
 package com.klmj.ridi_api;
 
-
-import java.io.IOException;
-
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        /*// Ruta del archivo en la unidad C
-        String filePath = "D:\\GitHub\\RIDI_API\\src\\main\\resources\\data_master\\";
-
-        try {
-            // Acceder al archivo en la unidad C
-            File fileM = new File(filePath + "estados-municipios.json");
-            File fileE = new File(filePath + "estados.json");
-            Scanner scanner = new Scanner(fileM);
-
-            while (scanner.hasNextLine()) {
-                String data = scanner.nextLine();
-                System.out.println(data);
-            }
-            scanner.close();
-
-            ObjectMapper objectMapper = new ObjectMapper();
-            EstadosMunicipio municipioPrueba = objectMapper.readValue(fileM, EstadosMunicipio.class);
-            List<Estado> estados = objectMapper.readValue(fileE, new TypeReference<List<Estado>>() {});
-
-            List<Municipio> municipios = new ArrayList<>();
-
-            municipioPrueba.Chiapas.forEach(m -> {
-                var est = estados.stream().reduce((e, a) -> (e.getNombre().equals("CHIAPAS")) ? e : a).orElse(new Estado());
-
-                municipios.add(new Municipio(null, m, est));
-            });
-
-            System.out.println(objectMapper.writeValueAsString(municipios));
-
-
-        } catch (Exception e) {
-            System.out.println("El archivo no se pudo encontrar: " + e.getMessage());
-        }*/
+    public static void main(String[] args) {
     }
 }
 
