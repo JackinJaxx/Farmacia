@@ -1,4 +1,4 @@
-/*package com.klmj.ridi_api.pdf;
+package com.klmj.ridi_api.pdf;
 
 import com.klmj.ridi_api.persistence.entity.management.Dispositivo;
 import com.lowagie.text.pdf.PdfPTable;
@@ -25,4 +25,4 @@ public class ReporteDispositivosPDF extends AbstractPdfView {
             
        // });
     }
-}*/
+}

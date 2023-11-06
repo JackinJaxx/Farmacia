@@ -42,4 +42,7 @@ public class Computadora extends Dispositivo implements Serializable {
     @JsonManagedReference
     @OneToMany(mappedBy = "computadora")
     private List<HistorialComputadora> historial;
+
+
+
 }

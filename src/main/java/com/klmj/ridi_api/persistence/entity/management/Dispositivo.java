@@ -1,7 +1,5 @@
 package com.klmj.ridi_api.persistence.entity.management;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.klmj.ridi_api.persistence.entity.Incidencia;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,7 +23,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"fabricante"})
+@EqualsAndHashCode(exclude = {"fabricante", "incidencias"})
 
 @Entity(name = "dispositivos")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -34,8 +32,14 @@ public class Dispositivo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "serial")
     private Long serial;
-    @Column(name = "no_serie", nullable = false, unique = true)
+    @Column(name = "no_serie", nullable = false)
     private String noSerie;
     @Column(length = 35)
     private String fabricante;
+
+    /**
+     * Son las incidencias que ha tenido el dispositivo
+     */
+    @OneToMany(mappedBy = "dispositivo")
+    private List<Incidencia> incidencias;
 }

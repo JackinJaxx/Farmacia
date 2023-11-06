@@ -10,15 +10,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface HistorialComputadoraRepository
-        extends JpaRepository<HistorialComputadora, HistorialComputadoraId> {
+public interface HistorialComputadoraRepository extends
+        JpaRepository<HistorialComputadora, HistorialComputadoraId> {
 
     @Query("SELECT hc FROM historial_computadora hc " +
             "WHERE hc.computadora.serial = :serial " +
             "ORDER BY hc.fechaRegistro")
     List<HistorialComputadora> findByComputadora(@Param("serial") long serialComputadora);
-
-    @Query("SELECT count(hc) FROM historial_computadora hc " +
-            "WHERE hc.computadora.serial = :serial")
-    Integer countByComputadora(@Param("serial") long serialComputadora);
 }
