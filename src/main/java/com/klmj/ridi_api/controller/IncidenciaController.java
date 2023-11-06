@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/estatus_incidencia/incidencia")
-public class IncidenciaController extends PersistenceController<Incidencia, Long>{
+@RequestMapping("/incidencias")
+public class IncidenciaController extends PersistenceController<Incidencia, Long> {
     @Autowired
-    public IncidenciaController(IncidenciaService service){super(service);}
+    public IncidenciaController(IncidenciaService service) {
+        super(service);
+    }
 }

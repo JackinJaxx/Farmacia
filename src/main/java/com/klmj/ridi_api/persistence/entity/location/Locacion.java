@@ -14,8 +14,14 @@ import lombok.*;
  * registrados donde opera el negocio.
  */
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(exclude = {"nombre", "direccion", "municipio"})
+
 @Entity(name = "locaciones")
-@Setter @Getter @ToString @NoArgsConstructor @AllArgsConstructor
 public class Locacion {
     @Id
     @Column(name = "id_locacion")

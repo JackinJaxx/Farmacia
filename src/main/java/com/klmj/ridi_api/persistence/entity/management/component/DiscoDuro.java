@@ -1,5 +1,7 @@
 package com.klmj.ridi_api.persistence.entity.management.component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.klmj.ridi_api.persistence.entity.management.Computadora;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,17 +22,17 @@ import lombok.*;
 @AllArgsConstructor
 
 @Entity(name = "discos_duros")
-
 @PrimaryKeyJoinColumn(referencedColumnName = "serial", name = "serial_disco_duro")
 public class DiscoDuro extends Componente{
     /**
      * En GigaBytes
      */
     @Column(name = "almacenamiento")
-    private String almacenamiento;
+    private Long almacenamiento;
     @Column(name = "nombre_disco")
     private String nombreDisco;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "serial_computadora")
     private Computadora computadora;

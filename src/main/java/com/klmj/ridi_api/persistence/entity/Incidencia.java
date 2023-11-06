@@ -1,5 +1,7 @@
 package com.klmj.ridi_api.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.klmj.ridi_api.persistence.entity.management.Dispositivo;
 import jakarta.persistence.*;
 import lombok.*;
@@ -31,27 +33,31 @@ public class Incidencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_incidencia", nullable = false)
     private Long id;
-    @Column(name = "fecha_inicio")
-    private LocalDateTime fechaInicio;
+    @Column(name = "fecha_inicio", nullable = false)
+    private LocalDateTime fechaInicio = LocalDateTime.now();
     @Column(name = "fecha_solucion")
     private LocalDateTime fechaSolucion;
     @Column
     private String descripcion;
     @Enumerated(EnumType.STRING)
-    private EstatusIncidencia estatus;
+    @Column(nullable = false)
+    private EstatusIncidencia estatus = EstatusIncidencia.EN_CURSO;
 
     @ManyToOne
-    @JoinColumn(name = "serial_dispositivo")
+    @JoinColumn(name = "serial_dispositivo", nullable = false)
     private Dispositivo dispositivo;
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
             name = "encargados_incidencia",
             joinColumns = @JoinColumn(
                     name = "incidencia",
-                    referencedColumnName = "id_incidencia"),
+                    referencedColumnName = "id_incidencia",
+                    nullable = false),
             inverseJoinColumns = @JoinColumn(
                     name = "encargado",
-                    referencedColumnName = "id_usuario"))
+                    referencedColumnName = "id_usuario",
+                    nullable = false))
     private List<Usuario> encargados;
 }

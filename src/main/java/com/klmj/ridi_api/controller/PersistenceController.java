@@ -1,9 +1,6 @@
 package com.klmj.ridi_api.controller;
 
 import com.klmj.ridi_api.service.PersistenceService;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Unmodifiable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -27,13 +24,6 @@ public abstract class PersistenceController<T, ID> {
     protected final PersistenceService<T, ID> service;
     protected final Logger logger;
 
-    @Contract("_, _ -> new")
-    static @NotNull @Unmodifiable Map<String, String> makeResponse(
-            String message,
-            @NotNull HttpStatus status) {
-        return Map.of("message", message, "status", status.toString());
-    }
-
     public PersistenceController(PersistenceService<T, ID> service) {
         this.service = service;
         this.logger = LoggerFactory.getLogger(this.getClass());
@@ -48,6 +38,17 @@ public abstract class PersistenceController<T, ID> {
         if (Objects.isNull(entitySaved))
             return new ResponseEntity<>(t, HttpStatus.NOT_MODIFIED);
         return new ResponseEntity<>(entitySaved, HttpStatus.OK);
+    }
+
+    @PostMapping("/todo")
+    public ResponseEntity<List<T>> guardar(@RequestBody List<T> ts) {
+        logger.info("Petición Post a las %s".formatted(LocalDateTime.now()));
+
+        List<T> entitiesSaved = service.guardar(ts);
+
+        if (Objects.isNull(entitiesSaved))
+            return new ResponseEntity<>(ts, HttpStatus.NOT_MODIFIED);
+        return new ResponseEntity<>(entitiesSaved, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -69,17 +70,10 @@ public abstract class PersistenceController<T, ID> {
     }
 
     @PutMapping
-    public ResponseEntity<String> actualizar(@RequestBody T t) {
+    public Boolean actualizar(@RequestBody T t) {
         logger.info("Petición Put a las %s".formatted(LocalDateTime.now()));
 
-        boolean result = service.actualizar(t);
-
-        if (result)
-            return new ResponseEntity<>(
-                    "instancia actualizada correctamente", HttpStatus.FOUND);
-        return new ResponseEntity<>(
-                "no hay instancia que coincidan para %s"
-                        .formatted(t), HttpStatus.NOT_MODIFIED);
+        return service.actualizar(t);
     }
 
     @DeleteMapping("/{id}")

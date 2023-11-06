@@ -1,6 +1,7 @@
 package com.klmj.ridi_api.controller.management;
 
 import com.klmj.ridi_api.controller.PersistenceController;
+import com.klmj.ridi_api.persistence.entity.management.Computadora;
 import com.klmj.ridi_api.persistence.entity.management.HistorialComputadora;
 import com.klmj.ridi_api.persistence.entity.management.embedd.HistorialComputadoraId;
 import com.klmj.ridi_api.service.management.HistorialComputadoraService;
@@ -22,9 +23,10 @@ public class HistorialComputadoraController
     }
 
     @Override
-    @GetMapping("/id")
-    public ResponseEntity<HistorialComputadora> leerPorID(@RequestBody HistorialComputadoraId historialComputadoraId) {
-        return super.leerPorID(historialComputadoraId);
+    @PostMapping("/por-historial")
+    public ResponseEntity<HistorialComputadora> guardar(HistorialComputadora historialComputadora) {
+        System.out.println("GUARDANDO POR HISTORIAL");
+        return super.guardar(historialComputadora);
     }
 
     @GetMapping("/{serial}")

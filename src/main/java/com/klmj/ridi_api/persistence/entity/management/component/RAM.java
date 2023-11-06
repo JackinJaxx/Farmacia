@@ -1,5 +1,7 @@
 package com.klmj.ridi_api.persistence.entity.management.component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.klmj.ridi_api.persistence.entity.management.Computadora;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,8 +29,9 @@ public class RAM extends Componente{
      * En GigaBytes
      */
     @Column
-    private String capacidad;
+    private Long capacidad;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "serial_computadora")
     private Computadora computadora;

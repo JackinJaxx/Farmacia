@@ -14,7 +14,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 
 @Embeddable
-public class HistorialComputadoraId implements Serializable {
+public class HistorialComputadoraId implements Serializable{
     @ManyToOne
     @JoinColumn(referencedColumnName = "serial_computadora", name = "serial_computadora")
     private Computadora computadora;

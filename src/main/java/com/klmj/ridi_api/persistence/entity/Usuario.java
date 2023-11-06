@@ -1,5 +1,7 @@
 package com.klmj.ridi_api.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -40,8 +42,9 @@ public class Usuario {
     @Column(name = "password", nullable = false)
     private String password;
     @Enumerated(EnumType.STRING)
-    private Grupo grupo;
+    private Grupo grupo = Grupo.BASIC_USER;
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "encargados")
     private List<Incidencia> incidencias;
 }

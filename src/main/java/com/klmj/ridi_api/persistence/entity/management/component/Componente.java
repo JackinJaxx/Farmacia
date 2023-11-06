@@ -1,5 +1,6 @@
 package com.klmj.ridi_api.persistence.entity.management.component;
 
+import com.klmj.ridi_api.persistence.entity.management.Computadora;
 import jakarta.persistence.*;
 import lombok.*;
 

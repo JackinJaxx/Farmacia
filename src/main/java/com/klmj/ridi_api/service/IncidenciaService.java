@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class IncidenciaService extends PersistenceService<Incidencia, Long>{
+public class IncidenciaService extends PersistenceService<Incidencia, Long> {
     @Autowired
-    public IncidenciaService(IncidenciaRepository repository){super(repository);}
+    public IncidenciaService(IncidenciaRepository repository) {
+        super(repository);
+    }
 }

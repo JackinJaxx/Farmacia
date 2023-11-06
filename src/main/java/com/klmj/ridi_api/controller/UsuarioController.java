@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/grupo/usuario")
-public class UsuarioController extends PersistenceController<Usuario, Long>{
+@RequestMapping("/usuarios")
+public class UsuarioController extends PersistenceController<Usuario, Long> {
     @Autowired
-    public UsuarioController(UsuarioService service){super(service);}
+    public UsuarioController(UsuarioService service) {
+        super(service);
+    }
 }

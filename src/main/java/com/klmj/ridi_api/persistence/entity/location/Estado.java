@@ -13,14 +13,18 @@ import lombok.*;
  * permanente, un territorio definido y un gobierno que es capaz de mantener control efectivo sobre el
  * territorio correspondiente y de conducir relaciones internacionales con otros estados.
  */
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(exclude = "nombre")
 
 @Entity(name = "estados")
-@Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
 public class Estado {
     @Id
-    @Column(name = "id_estado")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "clave_estado", nullable = false, length = 3)
+    private String clave;
     @Column(nullable = false , length = 20, unique = true)
     private String nombre;
 }
