@@ -12,19 +12,15 @@ import java.util.List;
 public interface LocacionRepository extends JpaRepository<Locacion, Long> {
     /**
      * Filtra por estado las locaciones.
-     * @param idEstado id del estado.
+     * @param claveEstado clave del estado.
      * @return una lista de locaciones.
      */
-    @Query("SELECT l FROM locaciones l " +
-            "WHERE l.municipio.estado.clave = :id")
-    List<Locacion> findByEstado(@Param("id") long idEstado);
+    List<Locacion> findByMunicipio_Estado_Clave(String claveEstado);
 
     /**
      * Filtra por municipio las locaciones.
      * @param idMunicipio id del municipio.
      * @return una lista de locaciones.
      */
-    @Query("SELECT l FROM locaciones l " +
-            "WHERE l.municipio.id = :id")
-    List<Locacion> findByMunicipio(@Param("id") long idMunicipio);
+    List<Locacion> findByMunicipio_Id(long idMunicipio);
 }

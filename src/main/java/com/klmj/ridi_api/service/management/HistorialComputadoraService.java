@@ -34,16 +34,9 @@ public class HistorialComputadoraService extends
         var computadora = historialComputadora.getComputadora();
         if (Objects.isNull(computadora)) return null;
 
-        historialComputadora.setCns(repository.countByComputadora(computadora.getSerial()) + 1);
+        historialComputadora.setCns(repository.countByComputadora_Serial(computadora.getSerial()) + 1);
         return repository.save(historialComputadora);
     }
-
-    /*public List<HistorialComputadora> guardar(@NotNull Computadora computadora) {
-        var historial = computadora.getHistorial();
-        return historial
-                .stream()
-                .map(this::guardar).toList();
-    }*/
 
     /**
      * Regresa todo el historial de una computadora.
@@ -51,6 +44,6 @@ public class HistorialComputadoraService extends
      * @return una lista con todos los historiales.
      */
     public List<HistorialComputadora> leerPorComputadora(long serialComputadora) {
-        return repository.findByComputadora(serialComputadora);
+        return repository.findByComputadora_Serial(serialComputadora);
     }
 }

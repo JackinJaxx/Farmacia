@@ -27,7 +27,7 @@ public class Componente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long serial;
-    @Column(name = "no_serie", nullable = false)
+    @Column(name = "no_serie", nullable = false, unique = true)
     private String noSerie;
     @Column
     private String fabricante;

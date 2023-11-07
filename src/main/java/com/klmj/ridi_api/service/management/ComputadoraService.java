@@ -2,16 +2,16 @@ package com.klmj.ridi_api.service.management;
 
 import com.klmj.ridi_api.persistence.entity.management.Computadora;
 import com.klmj.ridi_api.persistence.repository.management.ComputadoraRepository;
-import com.klmj.ridi_api.service.PersistenceService;
 import com.klmj.ridi_api.service.management.component.CPUService;
 import com.klmj.ridi_api.service.management.component.DiscoDuroService;
 import com.klmj.ridi_api.service.management.component.RAMService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ComputadoraService extends PersistenceService<Computadora, Long> {
+public class ComputadoraService extends DispositivoService<Computadora> {
     public RAMService ramService;
     public CPUService cpuService;
     public DiscoDuroService discoDuroService;
@@ -19,7 +19,7 @@ public class ComputadoraService extends PersistenceService<Computadora, Long> {
 
     @Autowired
     public ComputadoraService(
-            ComputadoraRepository repository) {
+            @Qualifier("computadoraRep") ComputadoraRepository repository) {
         super(repository);
     }
 
@@ -55,25 +55,25 @@ public class ComputadoraService extends PersistenceService<Computadora, Long> {
         var procesadores = computadora.getProcesadores();
         var discos = computadora.getDiscos();
 
-        var nComputadora = super.guardar(computadora);
+        var computadoraGuardada = super.guardar(computadora);
 
-        memoriasRam.forEach(m -> m.setComputadora(nComputadora));
-        var nMemoriasRam = ramService.guardar(computadora.getMemoriasRam());
-        nComputadora.setMemoriasRam(nMemoriasRam);
+        memoriasRam.forEach(m -> m.setComputadora(computadoraGuardada));
+        var ramGuardadas = ramService.guardar(computadora.getMemoriasRam());
+        computadoraGuardada.setMemoriasRam(ramGuardadas);
 
-        procesadores.forEach(p -> p.setComputadora(nComputadora));
-        var nProcesadores = cpuService.guardar(computadora.getProcesadores());
-        nComputadora.setProcesadores(nProcesadores);
+        procesadores.forEach(p -> p.setComputadora(computadoraGuardada));
+        var procesadoresGuardados = cpuService.guardar(computadora.getProcesadores());
+        computadoraGuardada.setProcesadores(procesadoresGuardados);
 
-        discos.forEach(d -> d.setComputadora(nComputadora));
-        var nDiscos = discoDuroService.guardar(computadora.getDiscos());
-        nComputadora.setDiscos(nDiscos);
+        discos.forEach(d -> d.setComputadora(computadoraGuardada));
+        var discosGuardados = discoDuroService.guardar(computadora.getDiscos());
+        computadoraGuardada.setDiscos(discosGuardados);
 
-        //var historial = computadora.getHistorial();
-        //historial.forEach(h -> h.setComputadora(nComputadora));
-        //var nHistorial = historialComputadoraService.guardar(historial);
-        //nComputadora.setHistorial(nHistorial);
+        var historial = computadora.getHistorial();
+        historial.forEach(h -> h.setComputadora(computadoraGuardada));
+        var historialGuardado = historialComputadoraService.guardar(historial);
+        computadoraGuardada.setHistorial(historialGuardado);
 
-        return nComputadora;
+        return computadoraGuardada;
     }
 }

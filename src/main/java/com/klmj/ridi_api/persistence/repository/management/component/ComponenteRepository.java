@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ComponenteRepository extends JpaRepository<Componente, Long> {
+public interface ComponenteRepository <C extends Componente> extends JpaRepository<C, Long> {
+    C findByNoSerie(String noSerie);
 }

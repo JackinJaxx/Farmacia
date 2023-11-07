@@ -1,7 +1,7 @@
 package com.klmj.ridi_api.persistence.entity.management;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.klmj.ridi_api.persistence.entity.abstracts.Historiable;
 import com.klmj.ridi_api.persistence.entity.management.component.CPU;
 import com.klmj.ridi_api.persistence.entity.management.component.DiscoDuro;
 import com.klmj.ridi_api.persistence.entity.management.component.RAM;
