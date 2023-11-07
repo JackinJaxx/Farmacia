@@ -28,7 +28,6 @@ public class Computadora extends Dispositivo implements Serializable {
     private String modelo;
     @Column(name = "ip_address")
     private String ipAddress;
-
     @JsonManagedReference
     @OneToMany(mappedBy = "computadora")
     private List<RAM> memoriasRam;
