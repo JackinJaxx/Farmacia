@@ -21,7 +21,7 @@ public class LocacionController extends PersistenceController<Locacion, Long> {
     }
 
     @GetMapping("/estado/{estado}")
-    public List<Locacion> leerPorEstado(@PathVariable("estado") long idEstado) {
+    public List<Locacion> leerPorEstado(@PathVariable("estado") String idEstado) {
         return locacionService.leerPorEstado(idEstado);
     }
 

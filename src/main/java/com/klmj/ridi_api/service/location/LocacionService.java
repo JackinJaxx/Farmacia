@@ -33,11 +33,11 @@ public class LocacionService extends PersistenceService<Locacion, Long> {
         return super.guardar(locacion);
     }
 
-    public List<Locacion> leerPorEstado(long idEstado) {
-        return repository.findByEstado(idEstado);
+    public List<Locacion> leerPorEstado(String idEstado) {
+        return repository.findByMunicipio_Estado_Clave(idEstado);
     }
 
     public List<Locacion> leerPorMunicipio(long idMunicipio) {
-        return repository.findByMunicipio(idMunicipio);
+        return repository.findByMunicipio_Id(idMunicipio);
     }
 }

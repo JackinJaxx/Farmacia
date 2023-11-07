@@ -1,14 +1,12 @@
 package com.klmj.ridi_api.persistence.repository.management;
 
 import com.klmj.ridi_api.persistence.entity.management.Computadora;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
+@Component
+@Qualifier("computadoraRep")
 @Repository
-public interface ComputadoraRepository extends JpaRepository<Computadora, Long> {
-    @Query("SELECT c.nombreSistema, h.estatus, c.serial FROM computadoras c INNER JOIN c.historial h")
-    List<String[]> findNombreSistemaEstatusId();
+public interface ComputadoraRepository extends DispositivoRepository<Computadora> {
 }
