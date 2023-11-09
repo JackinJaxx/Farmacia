@@ -16,7 +16,7 @@ import java.util.*;
  * @author Mauricio Betancourt Mora
  * @author Luis Hurtado Gomez
  * @version 1.0
- * Un controlador con los métodos CRUD básicos implementados.
+ * Un controlador con los métodos CRUD básicos implementados para cada clase controlador
  * @param <T> instancia de la @Entity class.
  * @param <ID> el tipo de dato de la @Id class.
  */

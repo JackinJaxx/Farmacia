@@ -4,6 +4,7 @@ import com.klmj.ridi_api.persistence.entity.location.Locacion;
 import com.klmj.ridi_api.persistence.entity.management.embedd.HistorialComputadoraId;
 import jakarta.persistence.*;
 import lombok.*;
+import net.sf.jasperreports.engine.JRDataSource;
 
 import java.time.LocalDateTime;
 
@@ -24,7 +25,8 @@ import java.time.LocalDateTime;
 
 @Entity(name = "historial_computadora")
 @Table
-@IdClass(HistorialComputadoraId.class)
+@IdClass(HistorialComputadoraId.class) /** HistorialComputadoraId: clase donde se genera la llave primaria compuesta**/
+
 public class HistorialComputadora {
     @Id
     @ManyToOne
@@ -44,4 +46,6 @@ public class HistorialComputadora {
     @ManyToOne
     @JoinColumn(name = "id_locacion", nullable = false)
     private Locacion locacion;
+
+
 }

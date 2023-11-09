@@ -16,6 +16,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+//Clase computadora con sus atributos. Hereda id de clase Dispositivo
 
 @Entity(name = "computadoras")
 @PrimaryKeyJoinColumn(name = "serial_computadora")
@@ -37,7 +38,7 @@ public class Computadora extends Dispositivo implements Serializable {
     @JsonManagedReference
     @OneToMany(mappedBy = "computadora")
     private List<DiscoDuro> discos;
-
+    //Relacion hacia la clase HistorialComputadora.
     @JsonManagedReference
     @OneToMany(mappedBy = "computadora")
     private List<HistorialComputadora> historial;

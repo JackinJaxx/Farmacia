@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/incidencias")
+//Clase que extiende PersistenceController donde se encuentran los metodos CRUD mas comunes
 public class IncidenciaController extends PersistenceController<Incidencia, Long> {
     @Autowired
     public IncidenciaController(IncidenciaService service) {

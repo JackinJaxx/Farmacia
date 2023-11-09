@@ -14,6 +14,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 
 @Embeddable
+//Clase que sirve para generar la llave primaria compuesta por el Id de Computadora y el cns que se genera automaticamente
 public class HistorialComputadoraId implements Serializable{
     @ManyToOne
     @JoinColumn(referencedColumnName = "serial_computadora", name = "serial_computadora")

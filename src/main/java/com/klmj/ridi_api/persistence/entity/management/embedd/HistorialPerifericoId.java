@@ -14,6 +14,8 @@ import java.io.Serializable;
 @EqualsAndHashCode
 
 @Embeddable
+//Clase que sirve para generar la llave primaria compuesta por el Id de la clase TipoPeriferico
+// y el cns que se genera automaticamente
 public class HistorialPerifericoId implements Serializable {
     @ManyToOne
     @JoinColumn(referencedColumnName = "serial_periferico", name = "serial_periferico")

@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
+
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController extends PersistenceController<Usuario, Long> {
@@ -13,4 +16,6 @@ public class UsuarioController extends PersistenceController<Usuario, Long> {
     public UsuarioController(UsuarioService service) {
         super(service);
     }
+
+
 }

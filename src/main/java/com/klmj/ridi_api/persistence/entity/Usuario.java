@@ -21,7 +21,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"correo", "no_telefono", "nombres", "apellido_p", "apellido_m", "password", "grupo", "incidencias"})
+@EqualsAndHashCode(exclude = {"correo", "no_telefono", "nombres", "apellido_p", "apellido_m", "password", "salt","grupo", "incidencias"})
 
 @Entity(name = "usuarios")
 public class Usuario {
@@ -41,6 +41,8 @@ public class Usuario {
     private String apellido_m;
     @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "salt", nullable = false)
+    private String salt;
     @Enumerated(EnumType.STRING)
     private Grupo grupo = Grupo.BASIC_USER;
 

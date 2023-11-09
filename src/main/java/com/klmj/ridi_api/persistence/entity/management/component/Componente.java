@@ -23,6 +23,7 @@ import lombok.*;
 
 @Entity(name = "componentes")
 @Inheritance(strategy = InheritanceType.JOINED)
+/**Superclase de las clases CPU, DiscoDuro y RAM**/
 public class Componente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

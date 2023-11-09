@@ -41,17 +41,28 @@ public class PDFController {
         this.service = service;
     }
 
+    /** Metodo para generar un pdf**/
     @GetMapping("/generate")
     public ResponseEntity<byte[]> generatePdf() {
         try {
+            //Pide una lista en este caso de computadoras a la base de datos mediante el servicio de computadora
             List<Computadora> dataSource = computadoraService.leerTodos();
+            //Convierte la lista en una array de la clase JRBeanArrayDataSource
             JRBeanArrayDataSource ds = new JRBeanArrayDataSource(dataSource.toArray());
+            /**Cuando se diseña el pdf con Jaspersoft Studio hay que declarar las variables
+             * y campos exactamente igual
+             * a como está en el codigo para que este funcione correctamente**/
             Map<String, Object> parameters = new HashMap<>();
+            //LogoRIDI está declarado como una imagen de java.io.inputStream en Jaspersoft Studio
             parameters.put("LogoRIDI", ImageResources.LogoRIDI.getIcono());
+            //ds fue el nombre con el que se declaró la tabla del reporte
             parameters.put("ds", ds);
-
+            //Manda los parametros a la clase PdfService para generar el pdf
             byte[] pdfBytes = service.generarComputadoraPDF(parameters, dataSource);
 
+            /**Una vez que regresó, esto es para cuando se abre la opcion de mostrar el pdf
+             * attachment significa que es para descargarlo automaticamente y filename el nombre con el que se
+             * va a guardar el reporte **/
             HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Disposition", "attachment; filename=report.pdf");
 
@@ -69,11 +80,9 @@ public class PDFController {
     @GetMapping("/exportarPDFComputadoras")
     public ModelAndView exportarPDFComputadoras(@RequestParam("lista") String jsonComputadoras) {
         ModelAndView modelAndView = new ModelAndView();
-       // modelAndView.setView(new JasperReportsPdfView()); // Usa la vista de JasperReportsPdfView
 
         try {
-            // Resto del código para cargar datos y plantillas de JasperReports
-            // ...
+
             InputStream LogoRIDI = ImageResources.LogoRIDI.getIcono(),
                     computadoraBien = ImageResources.COMPUTADORA_BIEN.getIcono(),
                     computadoraMal = ImageResources.COMPUTADORA_MAL.getIcono(),
@@ -87,7 +96,6 @@ public class PDFController {
             JasperReport report = (JasperReport) JRLoader.loadObject(reporteComputadora);
             JRBeanArrayDataSource ds = new JRBeanArrayDataSource(reporteComputadoras.toArray());
 
-            // Configura los parámetros y origen de datos
             modelAndView.addObject("ds", ds);
             modelAndView.addObject("LogoRIDI", LogoRIDI);
             modelAndView.addObject("reporte", reporteComputadora);

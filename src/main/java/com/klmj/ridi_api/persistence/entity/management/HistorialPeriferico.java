@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(exclude = {"fechaRegistro", "estatus", "locacion", "conectadoA"})
 
 @Entity(name = "historial_periferico")
-@IdClass(HistorialPerifericoId.class)
+@IdClass(HistorialPerifericoId.class) /** HistorialPerifericoId: clase donde se genera la llave primaria compuesta**/
 public class HistorialPeriferico {
     @JsonBackReference
     @Id
@@ -48,7 +48,7 @@ public class HistorialPeriferico {
     @JoinColumn(name = "id_locacion")
     private Locacion locacion;
     /**
-     * Es la computadora a la que está conectada.
+     * Referencia a la computadora que está conectada.
      */
     @ManyToOne
     @JoinColumn(name = "conectado_a")

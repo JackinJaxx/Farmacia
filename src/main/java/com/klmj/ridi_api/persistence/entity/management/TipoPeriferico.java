@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"descripcion"})
 
-@Entity(name = "tipos_periferico")
+@Entity(name = "tipos_periferico") //Clase para definir los tipos de perifericos
 public class TipoPeriferico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

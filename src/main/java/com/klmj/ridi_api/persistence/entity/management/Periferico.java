@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity(name = "perifericos")
-@PrimaryKeyJoinColumn(name = "serial_periferico")
+@PrimaryKeyJoinColumn(name = "serial_periferico") //Clase que hereda llave primaria de TipoPeriferico
 public class Periferico extends Dispositivo{
     @ManyToOne
     @JoinColumn(name = "id_tipo", nullable = false)

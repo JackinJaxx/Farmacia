@@ -23,13 +23,13 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"fabricante", "incidencias"})
+@EqualsAndHashCode(exclude = {"fabricante", "incidencias"}) //Se excluyen ambos parametros para generar los metodos equals y hashcode en esta clase
 
 @Entity(name = "dispositivos")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Dispositivo {
+public class Dispositivo { //Clase dispositivo que hereda a Computadora y Periferico
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//Genera un valor automaticamente
     @Column(name = "serial")
     private Long serial;
     @Column(name = "no_serie", nullable = false)
