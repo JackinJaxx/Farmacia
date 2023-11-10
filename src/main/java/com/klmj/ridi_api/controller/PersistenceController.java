@@ -58,7 +58,7 @@ public abstract class PersistenceController<T, ID> {
         Optional<T> entityRead = service.leerPorID(id);
 
         return entityRead
-                .map(e -> new ResponseEntity<>(e, HttpStatus.FOUND))
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
@@ -66,7 +66,7 @@ public abstract class PersistenceController<T, ID> {
     public ResponseEntity<List<T>> leerTodos() {
         //logger.info("Petición Get a las %s".formatted(LocalDateTime.now()));
 
-        return new ResponseEntity<>(service.leerTodos(), HttpStatus.FOUND);
+        return new ResponseEntity<>(service.leerTodos(), HttpStatus.OK);
     }
 
     @PutMapping
@@ -83,7 +83,7 @@ public abstract class PersistenceController<T, ID> {
         boolean result = service.borrar(id);
 
         if (result)
-            return new ResponseEntity<>("instancia borrada correctamente", HttpStatus.FOUND);
+            return new ResponseEntity<>("instancia borrada correctamente", HttpStatus.OK);
         return new ResponseEntity<>(
                 "no hay instancia que coincidan con el id %s"
                         .formatted(id), HttpStatus.NOT_MODIFIED);

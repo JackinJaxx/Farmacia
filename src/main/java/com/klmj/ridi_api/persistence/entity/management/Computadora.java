@@ -1,7 +1,7 @@
 package com.klmj.ridi_api.persistence.entity.management;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.klmj.ridi_api.persistence.entity.abstracts.Historiable;
 import com.klmj.ridi_api.persistence.entity.management.component.CPU;
 import com.klmj.ridi_api.persistence.entity.management.component.DiscoDuro;
 import com.klmj.ridi_api.persistence.entity.management.component.RAM;
@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -31,15 +32,31 @@ public class Computadora extends Dispositivo implements Serializable {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "computadora")
-    private List<RAM> memoriasRam;
+    private List<RAM> memoriasRam = new ArrayList<>();
     @JsonManagedReference
     @OneToMany(mappedBy = "computadora")
-    private List<CPU> procesadores;
+    private List<CPU> procesadores = new ArrayList<>();
     @JsonManagedReference
     @OneToMany(mappedBy = "computadora")
-    private List<DiscoDuro> discos;
+    private List<DiscoDuro> discos = new ArrayList<>();
 
     @JsonManagedReference
     @OneToMany(mappedBy = "computadora")
-    private List<HistorialComputadora> historial;
+    private List<HistorialComputadora> historial = new ArrayList<>();
+
+    @JsonIgnore
+    @Transient
+    private String estatusActual;
+
+    @PostLoad
+    public void generateStatus() {
+        estatusActual = (historial.isEmpty()) ?
+                "NO REGISTRADO" :
+                historial.get(historial.size() - 1).getEstatus();
+    }
+
+    public void setHistorial(List<HistorialComputadora> historial) {
+        this.historial = historial;
+        generateStatus();
+    }
 }

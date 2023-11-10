@@ -2,13 +2,13 @@ package com.klmj.ridi_api.service.management;
 
 import com.klmj.ridi_api.persistence.entity.management.Dispositivo;
 import com.klmj.ridi_api.persistence.repository.management.DispositivoRepository;
-import com.klmj.ridi_api.service.PersistenceService;
+import com.klmj.ridi_api.service.PdfService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
 
-public class DispositivoService <D extends Dispositivo> extends PersistenceService<D, Long> {
+public abstract class DispositivoService <D extends Dispositivo> extends PdfService<D, Long> {
 
     protected DispositivoRepository<D> repository;
 
