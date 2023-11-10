@@ -82,13 +82,18 @@ public abstract class PersistenceService <T,ID> {
     }
 
     public boolean siExiste(@NotNull T t) {
-        try {
+        try{
             return repository.exists(Example.of(t));
+
         } catch (EntityNotFoundException ex) {
             System.out.printf("%n**%s no encontrado**%n%n", t);
             return false;
         }
     }
 
+
+    public Optional<T> buscarPor(T t){
+       return repository.findOne(Example.of(t));
+    }
 
 }

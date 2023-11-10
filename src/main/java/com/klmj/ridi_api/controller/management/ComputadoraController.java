@@ -16,26 +16,5 @@ public class ComputadoraController extends
         super(service);
     }
 
-    /*@Override
-    @PostMapping
-    public ResponseEntity<Computadora> guardar(@RequestBody Computadora computadora){
-        var computadoraGuardado = super.guardar(computadora);
-        if(Objects.isNull(computadoraGuardado.getBody()))
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        try {
-
-            if(computadoraGuardado.getBody().getSerial() != null) {
-                logger.info("Computadora: %s ha sido guardada correctamente".formatted(computadoraGuardado));
-                return new ResponseEntity<>(computadoraGuardado.getBody(), HttpStatus.ACCEPTED);
-            } else {
-                logger.info("La computadora %s NO ha sido guardada correctamente".formatted(computadoraGuardado.getBody()));
-                return new ResponseEntity<>(computadoraGuardado.getBody(), HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        } catch (NullPointerException e) {
-            logger.info("ocurrió un error inesperado %s".formatted(e.getMessage()));
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-    }*/
 }

@@ -2,9 +2,11 @@ package com.klmj.ridi_api.service;
 
 import com.klmj.ridi_api.persistence.entity.Usuario;
 import com.klmj.ridi_api.persistence.repository.UsuarioRepository;
+import org.apache.catalina.User;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
@@ -12,6 +14,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Optional;
 
 //Clase que extiende PersistenceController donde se encuentran los metodos CRUD mas comunes
 @Service
@@ -72,7 +75,20 @@ public class UsuarioService extends PersistenceService<Usuario, Long> {
         String hashedPassword = hashPasswordWithSalt(password, salt);
         user.setPassword(hashedPassword);
         user.setSalt(salt);
-
         return super.guardar(user);
+    }
+
+
+
+    @Override
+    public boolean siExiste(@NotNull Usuario user){
+        String paswordTemp = user.getPassword();
+        user.setPassword(null);
+        Optional<Usuario> usuarioDB = super.buscarPor(user);
+        String salt = usuarioDB.get().getSalt();
+        String hashedPassword = hashPasswordWithSalt(paswordTemp, salt);
+        user.setPassword(hashedPassword);
+        return siExiste(user);
+
     }
 }
