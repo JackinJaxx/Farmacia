@@ -2,7 +2,9 @@ package com.klmj.ridi_api.service;
 
 import com.klmj.ridi_api.persistence.entity.Usuario;
 import com.klmj.ridi_api.persistence.repository.UsuarioRepository;
-import jakarta.validation.constraints.NotNull;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,8 @@ public class UsuarioService extends PersistenceService<Usuario, Long> {
     }
 
 
-    public static String hashPasswordWithSalt(String password, String salt) {
+    public static @Nullable String hashPasswordWithSalt(
+            @NotNull String password, @NotNull String salt) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] saltBytes = salt.getBytes(StandardCharsets.UTF_8);
@@ -41,7 +44,8 @@ public class UsuarioService extends PersistenceService<Usuario, Long> {
         }
     }
     //Salt que se genera aleatoriamente
-    private static String generateSalt() {
+    @Contract(" -> new")
+    private static @NotNull String generateSalt() {
         byte[] salt = new byte[16];
         new SecureRandom().nextBytes(salt);
         return new String(salt, StandardCharsets.UTF_8);
@@ -56,15 +60,20 @@ public class UsuarioService extends PersistenceService<Usuario, Long> {
        user.setSalt(salt);
         return super.guardar(user);
     }
+
     @Override
     public boolean siExiste(@NotNull Usuario user){
-        String paswordTemp = user.getPassword();
+        String passwordTemp = user.getPassword();
         user.setPassword(null);
-        Optional<Usuario> usuarioDB = super.buscarPor(user);
-        String salt = usuarioDB.get().getSalt();
-        String hashedPassword = hashPasswordWithSalt(paswordTemp, salt);
-        user.setPassword(hashedPassword);
-        return siExiste(user);
 
+        Optional<Usuario> usuarioDB = super.buscarPor(user);
+        if (usuarioDB.isPresent()) {
+            String salt = usuarioDB.get().getSalt();
+            String hashedPassword = hashPasswordWithSalt(passwordTemp, salt);
+            user.setPassword(hashedPassword);
+
+            return super.siExiste(user);
+        }
+        return false;
     }
 }

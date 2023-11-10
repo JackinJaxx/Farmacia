@@ -1,12 +1,7 @@
 package com.klmj.ridi_api.persistence.entity.management;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.klmj.ridi_api.persistence.entity.Incidencia;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 /**
  * @author Kevin Alejandro Francisco Gonzalez

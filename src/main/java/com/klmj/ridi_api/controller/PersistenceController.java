@@ -29,7 +29,7 @@ public abstract class PersistenceController<T, ID> {
         this.logger = LoggerFactory.getLogger(this.getClass());
     }
 
-    @PostMapping
+    @PostMapping(produces = "application/json")
     public ResponseEntity<T> guardar(@RequestBody T t) {
         logger.info("Petición Post a las %s".formatted(LocalDateTime.now()));
 
@@ -40,7 +40,7 @@ public abstract class PersistenceController<T, ID> {
         return new ResponseEntity<>(entitySaved, HttpStatus.OK);
     }
 
-    @PostMapping("/todo")
+    @PostMapping(value = "/todo", produces = "application/json")
     public ResponseEntity<List<T>> guardar(@RequestBody List<T> ts) {
         logger.info("Petición Post a las %s".formatted(LocalDateTime.now()));
 
@@ -51,7 +51,7 @@ public abstract class PersistenceController<T, ID> {
         return new ResponseEntity<>(entitiesSaved, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<T> leerPorID(@PathVariable("id") ID id) {
         logger.info("Petición Get a las %s".formatted(LocalDateTime.now()));
 
@@ -62,21 +62,21 @@ public abstract class PersistenceController<T, ID> {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping
+    @GetMapping(produces = "application/json")
     public ResponseEntity<List<T>> leerTodos() {
         //logger.info("Petición Get a las %s".formatted(LocalDateTime.now()));
 
         return new ResponseEntity<>(service.leerTodos(), HttpStatus.OK);
     }
 
-    @PutMapping
+    @PutMapping(produces = "application/json")
     public Boolean actualizar(@RequestBody T t) {
         logger.info("Petición Put a las %s".formatted(LocalDateTime.now()));
 
         return service.actualizar(t);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<String> borrar(@PathVariable("id") ID id) {
         logger.info("Petición Delete a las %s".formatted(LocalDateTime.now()));
 
