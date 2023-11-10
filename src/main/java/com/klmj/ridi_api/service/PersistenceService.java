@@ -89,4 +89,9 @@ public abstract class PersistenceService <T,ID> {
             return false;
         }
     }
+
+    public Optional<T> buscarPor(T t){
+        return repository.findOne(Example.of(t));
+    }
+
 }
