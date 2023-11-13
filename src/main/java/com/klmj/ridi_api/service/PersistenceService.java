@@ -20,7 +20,7 @@ import java.util.Optional;
  * @param <ID> el tipo de dato de la @Id class.
  */
 @Getter
-public abstract class PersistenceService <T,ID> {
+public abstract class PersistenceService <T,ID>  {
 
     protected final JpaRepository<T, ID> repository;
 

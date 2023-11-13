@@ -15,15 +15,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class PdfService<T, ID> extends PersistenceService<T, ID> {
+public abstract class PdfService<T, ID> extends PersistenceService<T, ID> implements PdfReportService<T> {
 
     public PdfService(
             JpaRepository<T, ID> repository) {
         super(repository);
     }
 
-    public byte[] exportPdf(@NotNull List<T> ms, @NotNull PdfReports report) throws JRException {
-        return JasperExportManager.exportReportToPdf(generateReport(ms, report));
+    @Override
+    public byte[] exportPdf(List<T> data, PdfReports report) throws JRException {
+        return JasperExportManager.exportReportToPdf(generateReport(data, report));
     }
 
     public abstract JasperPrint generateReport(@NotNull List<T> ms, @NotNull PdfReports report) throws JRException;

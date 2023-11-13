@@ -10,9 +10,9 @@ import java.util.Objects;
 
 @Getter
 public enum PdfReports {
-    COMPUTADORAS(Objects.requireNonNull(
-            PdfReports.class.getClassLoader().getResource(
-                    "pdf/ReporteComputadoras.jrxml")));
+    COMPUTADORAS(Objects.requireNonNull(PdfReports.class.getClassLoader().getResource("pdf/ReporteComputadoras.jrxml"))),
+    HISTORIAL(Objects.requireNonNull(PdfReports.class.getClassLoader().getResource("pdf/ReporteHistorial.jrxml")));
+
 
     private final JasperReport report;
 

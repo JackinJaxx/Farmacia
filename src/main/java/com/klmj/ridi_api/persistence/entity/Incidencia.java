@@ -60,4 +60,12 @@ public class Incidencia {
                     referencedColumnName = "id_usuario",
                     nullable = false))
     private List<Usuario> encargados;
+
+    public String getFechaInicio(){
+        return this.fechaInicio.toString();
+    }
+
+    public String getFechaSolucion(){
+        return this.fechaSolucion.toString();
+    }
 }

@@ -58,6 +58,10 @@ public class HistorialComputadora implements Serializable {
         this.fechaRegistro = LocalDateTime.parse(fechaConFormato, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
     }
 
+    public String getFechaRegistro(){return fechaRegistro.toString();
+    }
+    public String getLocacionComputadora(){
+        return locacion.getNombre();}
     public String getNoSerieComputadora() {
         return computadora.getNoSerie();
     }
