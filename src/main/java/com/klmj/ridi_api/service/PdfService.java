@@ -1,19 +1,13 @@
 package com.klmj.ridi_api.service;
 
-import com.klmj.ridi_api.pdf.ImagesResources;
 import com.klmj.ridi_api.pdf.PdfReports;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Esta clase abstracta representa un servicio para generar informes PDF a partir de una lista de entidades.
@@ -38,7 +32,7 @@ public abstract class PdfService<T, ID> extends PersistenceService<T, ID> implem
      * @throws JRException Si se produce un error al generar el informe.
      */
     @Override
-    public byte[] exportPdf(List<T> data, PdfReports report) throws JRException {
+    public byte[] exportPdf(@NotNull List<T> data, @NotNull PdfReports report) throws JRException {
         return JasperExportManager.exportReportToPdf(generateReport(data, report));
     }
 

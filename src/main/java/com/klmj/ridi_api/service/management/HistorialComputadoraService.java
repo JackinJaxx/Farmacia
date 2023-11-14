@@ -2,7 +2,6 @@ package com.klmj.ridi_api.service.management;
 
 import com.klmj.ridi_api.pdf.ImagesResources;
 import com.klmj.ridi_api.pdf.PdfReports;
-import com.klmj.ridi_api.persistence.entity.management.Computadora;
 import com.klmj.ridi_api.persistence.entity.management.HistorialComputadora;
 import com.klmj.ridi_api.persistence.entity.management.embedd.HistorialComputadoraId;
 import com.klmj.ridi_api.persistence.repository.management.HistorialComputadoraRepository;
@@ -60,7 +59,7 @@ public class HistorialComputadoraService extends
 
 
     @Override
-    public byte[] exportPdf(List<HistorialComputadora> data, PdfReports report) throws JRException {
+    public byte[] exportPdf(@NotNull List<HistorialComputadora> data, @NotNull PdfReports report) throws JRException {
         return JasperExportManager.exportReportToPdf(generateReport(data, report));
     }
 

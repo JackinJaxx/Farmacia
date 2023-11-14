@@ -12,12 +12,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
+
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-/**Clase que hereda su Id de la clase Dispostivo **/
+
 @Entity(name = "computadoras")
 @PrimaryKeyJoinColumn(name = "serial_computadora")
 public class Computadora extends Dispositivo implements Serializable {
@@ -47,22 +51,33 @@ public class Computadora extends Dispositivo implements Serializable {
     @JsonIgnore
     @Transient
     private String estatusActual;
+    @JsonIgnore
+    @Transient
+    private String locacionActual;
 
-    /** El método generateStatus() está anotado con @PostLoad porque genera la propiedad estatusActual
+    /** El método generate está anotado con @PostLoad porque genera la propiedad estatusActual
      * basada en la propiedad histórica de la entidad.
      * Esto asegura que la propiedad estatusActual esté siempre actualizada,
      * incluso si la propiedad historial se modifica después
-     * de que la entidad haya sido cargada desde la base de datos.**/
+     * de que la entidad haya sido cargada desde la base de datos.
+     */
 
     @PostLoad
-    public void generateStatus() {
-        estatusActual = (historial.isEmpty()) ?
-                "NO REGISTRADO" :
-                historial.get(historial.size() - 1).getEstatus();
+    public void generate() {
+        if (historial.isEmpty()) {
+            estatusActual = "NO REGISTRADO";
+            locacionActual = "NO REGISTRADO";
+            return;
+        }
+
+        var lastHistorial = historial.get(historial.size() - 1);
+
+        estatusActual = lastHistorial.getEstatus();
+        locacionActual = lastHistorial.getLocacion().getNombre();
     }
 
     public void setHistorial(List<HistorialComputadora> historial) {
         this.historial = historial;
-        generateStatus();
+        generate();
     }
 }
