@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.Objects;
 
 /**
- *
+ *Clase donde se declaran las direcciones de las imagenes a usar
  */
 
 @Getter

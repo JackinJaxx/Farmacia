@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static com.klmj.ridi_api.controller.PdfController.createHeader;
+/**Controlador REST para las operaciones relacionadas con el historial de computadoras,
+ * hereda de PersistenceController para operaciones básicas
+ * y PdfController para la exportación de archivos PDF**/
 
 @RestController
 @RequestMapping("/dispositivos/computadoras/historial")
@@ -39,6 +42,8 @@ public class HistorialComputadoraController
         return new ResponseEntity<>(service.leerPorComputadora(serialComputadora), HttpStatus.FOUND);
     }
 
+
+    /** Método para exportar un informe PDF del historial de computadoras mediante una solicitud GET**/
 
     @GetMapping("/pdf")
     public ResponseEntity<byte[]> exportPdf() {

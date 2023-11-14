@@ -47,6 +47,10 @@ public class Incidencia {
     @JoinColumn(name = "serial_dispositivo", nullable = false)
     private Dispositivo dispositivo;
 
+    /**
+     *    Establece una relación muchos a muchos entre las entidades Incidencia y Usuario,
+     *    y utiliza una tabla de unión llamada "encargados_incidencia" para gestionar esta relación.
+     */
     @JsonManagedReference
     @ManyToMany
     @JoinTable(

@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.Objects;
 
+/**Clase donde se declaran las url de los reportes para generarlos **/
 @Getter
 public enum PdfReports {
     COMPUTADORAS(Objects.requireNonNull(PdfReports.class.getClassLoader().getResource("pdf/ReporteComputadoras.jrxml"))),

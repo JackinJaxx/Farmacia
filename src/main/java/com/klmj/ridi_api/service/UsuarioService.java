@@ -13,15 +13,28 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Optional;
-
+/**
+ * Esta clase representa un servicio para administrar entidades `Usuario`.
+ * Extiende la clase `PersistenceService`, que proporciona métodos comunes para trabajar con entidades.
+ */
 @Service
 public class UsuarioService extends PersistenceService<Usuario, Long> {
+    /**
+     * Crea una nueva instancia de la clase `UsuarioService`.
+     *@param repository El repositorio para la entidad `Usuario`.
+     */
     @Autowired
     public UsuarioService(UsuarioRepository repository) {
         super(repository);
     }
 
-
+    /**
+     * Encripta una contraseña con una sal.
+     * @param password La contraseña a encriptar.
+     * @param salt La sal a utilizar.
+     * @return La contraseña encriptada.
+     * @throws NoSuchAlgorithmException Si el algoritmo SHA-256 no está disponible.
+     */
     public static @Nullable String hashPasswordWithSalt(
             @NotNull String password, @NotNull String salt) {
         try {
@@ -43,7 +56,10 @@ public class UsuarioService extends PersistenceService<Usuario, Long> {
             return null;
         }
     }
-    //Salt que se genera aleatoriamente
+    /**
+     * Genera una sal aleatoria.
+     * @return La sal generada.
+     */
     @Contract(" -> new")
     private static @NotNull String generateSalt() {
         byte[] salt = new byte[16];
@@ -51,6 +67,11 @@ public class UsuarioService extends PersistenceService<Usuario, Long> {
         return new String(salt, StandardCharsets.UTF_8);
     }
 
+    /**
+     * Guarda una entidad `Usuario`.
+     * @param user La entidad `Usuario` a guardar.
+     * @return La entidad `Usuario` guardada.
+     */
     @Override
     public Usuario guardar(@NotNull Usuario user) {
         String salt = generateSalt();
@@ -61,6 +82,11 @@ public class UsuarioService extends PersistenceService<Usuario, Long> {
         return super.guardar(user);
     }
 
+    /**
+     * Comprueba si una entidad `Usuario` existe.
+     * @param user La entidad `Usuario` a comprobar.
+     * @return `true` si la entidad `Usuario` existe, `false` en caso contrario.
+     */
     @Override
     public boolean siExiste(@NotNull Usuario user){
         String passwordTemp = user.getPassword();

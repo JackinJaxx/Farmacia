@@ -1,9 +1,11 @@
 package com.klmj.ridi_api.persistence.entity.management;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.klmj.ridi_api.persistence.entity.location.Locacion;
 import com.klmj.ridi_api.persistence.entity.management.embedd.HistorialComputadoraId;
 import jakarta.persistence.*;
+import jakarta.servlet.ServletOutputStream;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 
@@ -53,6 +55,9 @@ public class HistorialComputadora implements Serializable {
     @JoinColumn(name = "id_locacion", nullable = false)
     private Locacion locacion;
 
+    @JsonIgnore
+    @Transient
+    private String nombreComputadora;
     public void setFechaConFormato(String fechaConFormato) {
         this.fechaConFormato = fechaConFormato;
         this.fechaRegistro = LocalDateTime.parse(fechaConFormato, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
@@ -63,10 +68,11 @@ public class HistorialComputadora implements Serializable {
     public String getLocacionComputadora(){
         return locacion.getNombre();}
     public String getNoSerieComputadora() {
-        return computadora.getNoSerie();
+        return (computadora != null) ? computadora.getNoSerie() : "";
     }
 
-    public String getNombreComputadora() {
-        return computadora.getNombreSistema();
+    @PostLoad
+    public void setNombreComputadora() {
+        nombreComputadora = computadora.getNombreSistema();
     }
 }

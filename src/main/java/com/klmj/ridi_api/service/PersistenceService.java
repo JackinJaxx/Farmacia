@@ -80,6 +80,11 @@ public abstract class PersistenceService <T,ID>  {
         repository.deleteById(id);
         return repository.findById(id).isEmpty();
     }
+    /**
+     * Busca en una tabla si el objeto ya existe .
+     * @param t el objeto a buscar.
+     * @return verdadero en caso de no haber ningún problema, al contrario devuelve falso.
+     */
 
     public boolean siExiste(@NotNull T t) {
         try {

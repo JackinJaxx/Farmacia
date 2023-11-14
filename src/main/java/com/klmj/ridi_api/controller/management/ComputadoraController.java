@@ -20,6 +20,9 @@ public class ComputadoraController extends
         super(service);
     }
 
+
+    /**Método implementado de PdfController para exportar un informe PDF de computadoras**/
+
     @Override
     public ResponseEntity<byte[]> exportPdf() {
         try {

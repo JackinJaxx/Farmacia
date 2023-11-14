@@ -35,7 +35,6 @@
 			<![CDATA[]]>
 		</queryString>
 		<field name="nombreComputadora" class="java.lang.String"/>
-		<field name="noSerie" class="java.lang.Long"/>
 		<field name="estatus" class="java.lang.String"/>
 		<field name="getNoSerieComputadora" class="java.lang.String"/>
 		<field name="ipAddress" class="java.lang.String"/>

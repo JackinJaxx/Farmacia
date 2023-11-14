@@ -22,6 +22,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
+/**
+ * Esta clase representa un servicio para la gestión de entidades `Computadora`.
+ * Extiende la clase `DispositivoService`, que proporciona métodos comunes para trabajar con entidades.
+ */
 @Service
 public class ComputadoraService extends DispositivoService<Computadora> {
     public RAMService ramService;
@@ -88,6 +93,13 @@ public class ComputadoraService extends DispositivoService<Computadora> {
 
         return computadoraGuardada;
     }
+    /**
+     * Genera un informe JasperPrint para una lista de entidades de `Computadora`.
+     * @param ms La lista de entidades `Computadora` para incluir en el informe.
+     * @param report La plantilla de informe PDF que se utilizará.
+     * @return Un objeto JasperPrint que representa el informe.
+     * @throws JRException Si hay un error al generar el informe.
+     */
 
     @Override
     public JasperPrint generateReport(@NotNull List<Computadora> ms, @NotNull PdfReports report) throws JRException {

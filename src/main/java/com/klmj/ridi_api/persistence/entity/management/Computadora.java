@@ -17,7 +17,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-
+/**Clase que hereda su Id de la clase Dispostivo **/
 @Entity(name = "computadoras")
 @PrimaryKeyJoinColumn(name = "serial_computadora")
 public class Computadora extends Dispositivo implements Serializable {
@@ -47,6 +47,12 @@ public class Computadora extends Dispositivo implements Serializable {
     @JsonIgnore
     @Transient
     private String estatusActual;
+
+    /** El método generateStatus() está anotado con @PostLoad porque genera la propiedad estatusActual
+     * basada en la propiedad histórica de la entidad.
+     * Esto asegura que la propiedad estatusActual esté siempre actualizada,
+     * incluso si la propiedad historial se modifica después
+     * de que la entidad haya sido cargada desde la base de datos.**/
 
     @PostLoad
     public void generateStatus() {
