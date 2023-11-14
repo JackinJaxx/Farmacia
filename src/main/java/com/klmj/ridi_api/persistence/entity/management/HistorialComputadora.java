@@ -58,6 +58,13 @@ public class HistorialComputadora implements Serializable {
     @JsonIgnore
     @Transient
     private String nombreComputadora;
+    @JsonIgnore
+    @Transient
+    private String direccionComputadora;
+    @JsonIgnore
+    @Transient
+    private String noSerieComputadora;
+
     public void setFechaConFormato(String fechaConFormato) {
         this.fechaConFormato = fechaConFormato;
         this.fechaRegistro = LocalDateTime.parse(fechaConFormato, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
@@ -72,7 +79,9 @@ public class HistorialComputadora implements Serializable {
     }
 
     @PostLoad
-    public void setNombreComputadora() {
+    public void generate() {
         nombreComputadora = computadora.getNombreSistema();
+        direccionComputadora = computadora.getLocacionActual();
+        noSerieComputadora = computadora.getNoSerie();
     }
 }

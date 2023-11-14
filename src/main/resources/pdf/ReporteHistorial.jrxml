@@ -36,10 +36,10 @@
 		</queryString>
 		<field name="nombreComputadora" class="java.lang.String"/>
 		<field name="estatus" class="java.lang.String"/>
-		<field name="getNoSerieComputadora" class="java.lang.String"/>
+		<field name="noSerieComputadora" class="java.lang.String"/>
 		<field name="ipAddress" class="java.lang.String"/>
-		<field name="getFechaRegistro" class="java.lang.String"/>
-		<field name="getDireccionComputadora" class="java.lang.String"/>
+		<field name="fechaConFormato" class="java.lang.String"/>
+		<field name="direccionComputadora" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="LogoRIDI" class="java.io.InputStream"/>
 	<parameter name="ds" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
@@ -51,25 +51,25 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="80" splitType="Stretch">
+		<band height="100" splitType="Stretch">
 			<image onErrorType="Blank">
-				<reportElement x="0" y="0" width="70" height="70" uuid="8a833e55-1b66-4965-8259-5ed48c8d5ca4">
+				<reportElement x="0" y="0" width="110" height="100" uuid="8a833e55-1b66-4965-8259-5ed48c8d5ca4">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<imageExpression><![CDATA[$P{LogoRIDI}]]></imageExpression>
 			</image>
-			<textField pattern="MMM d, yyyy h:mm:ss a">
-				<reportElement x="450" y="60" width="100" height="20" uuid="1aeee942-c2c2-4494-9a40-a1fe3feb0c42"/>
+			<textField pattern="dd&apos; de &apos;MMMM&apos; del &apos;yyyy">
+				<reportElement x="390" y="50" width="160" height="30" uuid="1aeee942-c2c2-4494-9a40-a1fe3feb0c42"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="220" y="30" width="100" height="30" uuid="62e79d75-ef6a-48e9-a328-12da0f73215e"/>
+				<reportElement mode="Opaque" x="210" y="15" width="120" height="50" uuid="62e79d75-ef6a-48e9-a328-12da0f73215e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="22" isBold="true"/>
+					<font size="29" isBold="true"/>
 				</textElement>
 				<text><![CDATA[RIDI]]></text>
 			</staticText>
@@ -92,7 +92,7 @@
 	<detail>
 		<band height="270" splitType="Stretch">
 			<componentElement>
-				<reportElement x="0" y="40" width="595" height="230" uuid="202e2d5f-fd9f-4881-99d3-41de1ec7c8e5">
+				<reportElement x="0" y="20" width="595" height="230" uuid="202e2d5f-fd9f-4881-99d3-41de1ec7c8e5">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -116,7 +116,7 @@
 						<jr:detailCell style="Table_TD" height="90">
 							<textField>
 								<reportElement x="0" y="0" width="100" height="90" uuid="257c6fb7-7dc5-43e1-8745-f7fb273929d7"/>
-								<textFieldExpression><![CDATA[$F{getNoSerieComputadora}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{noSerieComputadora}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -188,7 +188,7 @@
 						<jr:detailCell style="Table_TD" height="90">
 							<textField>
 								<reportElement x="0" y="0" width="90" height="90" uuid="7f22d48f-b437-4335-9496-65ffebd1315d"/>
-								<textFieldExpression><![CDATA[$F{getFechaRegistro}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{fechaConFormato}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -206,7 +206,7 @@
 						<jr:detailCell style="Table_TD" height="90">
 							<textField>
 								<reportElement x="0" y="0" width="100" height="90" uuid="0e93d1c2-767e-44c6-92dd-bd8f5600c080"/>
-								<textFieldExpression><![CDATA[$F{getDireccionComputadora}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{direccionComputadora}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
