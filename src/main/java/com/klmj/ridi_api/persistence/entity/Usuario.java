@@ -49,4 +49,5 @@ public class Usuario {
     @JsonBackReference
     @ManyToMany(mappedBy = "encargados")
     private List<Incidencia> incidencias;
+
 }

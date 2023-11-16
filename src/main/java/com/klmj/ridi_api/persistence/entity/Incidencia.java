@@ -1,12 +1,14 @@
 package com.klmj.ridi_api.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.klmj.ridi_api.persistence.entity.management.Dispositivo;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -64,6 +66,39 @@ public class Incidencia {
                     referencedColumnName = "id_usuario",
                     nullable = false))
     private List<Usuario> encargados;
+
+    @JsonIgnore
+    @Transient
+    private String encargadoActual;
+
+    @JsonIgnore
+    @Transient
+    private String fechaConInicio;
+
+    @JsonIgnore
+    @Transient
+    private String fechaConSolucion;
+
+    @JsonIgnore
+    @Transient
+    private String noSerieDispositivo;
+    @PostLoad
+    public void generete(){
+        for (Usuario usuario : this.getEncargados()) {
+            encargadoActual = usuario.getNombres(); // o usuario.nombre si es un campo público
+        }
+
+        if (fechaSolucion != null) {
+                fechaConSolucion = fechaSolucion.toString();
+        } else {
+            // La cadena es null, asigna un valor predeterminado especial
+            fechaConSolucion = "Proximamente";  // O cualquier otro valor especial que desees
+        }
+          fechaInicio = LocalDateTime.parse(fechaConInicio, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        fechaConInicio = fechaInicio.toString();
+        noSerieDispositivo = dispositivo.getNoSerie();
+
+    }
 
     public String getFechaInicio(){
         return this.fechaInicio.toString();

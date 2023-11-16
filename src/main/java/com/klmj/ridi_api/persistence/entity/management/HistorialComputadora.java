@@ -43,8 +43,6 @@ public class HistorialComputadora implements Serializable {
     private Integer cns;
     @Column(name = "fecha_registro", nullable = false )
     private LocalDateTime fechaRegistro;
-    @Transient
-    private String fechaConFormato;
     @Column(name = "estatus")
     private String estatus;
     @Column(name = "ip_address")
@@ -64,18 +62,13 @@ public class HistorialComputadora implements Serializable {
     @JsonIgnore
     @Transient
     private String noSerieComputadora;
+    @JsonIgnore
+    @Transient
+    private String fechaConFormato;
 
     public void setFechaConFormato(String fechaConFormato) {
         this.fechaConFormato = fechaConFormato;
         this.fechaRegistro = LocalDateTime.parse(fechaConFormato, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-    }
-
-    public String getFechaRegistro(){return fechaRegistro.toString();
-    }
-    public String getLocacionComputadora(){
-        return locacion.getNombre();}
-    public String getNoSerieComputadora() {
-        return (computadora != null) ? computadora.getNoSerie() : "";
     }
 
     @PostLoad
@@ -83,5 +76,6 @@ public class HistorialComputadora implements Serializable {
         nombreComputadora = computadora.getNombreSistema();
         direccionComputadora = computadora.getLocacionActual();
         noSerieComputadora = computadora.getNoSerie();
+        fechaConFormato = fechaRegistro.toString();
     }
 }

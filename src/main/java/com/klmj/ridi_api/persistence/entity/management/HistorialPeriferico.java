@@ -1,6 +1,7 @@
 package com.klmj.ridi_api.persistence.entity.management;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.klmj.ridi_api.persistence.entity.location.Locacion;
 import com.klmj.ridi_api.persistence.entity.management.embedd.HistorialPerifericoId;
 import jakarta.persistence.*;
@@ -53,4 +54,37 @@ public class HistorialPeriferico {
     @ManyToOne
     @JoinColumn(name = "conectado_a")
     private Computadora conectadoA;
+
+
+    @JsonIgnore
+    @Transient
+    private String locacionActual;
+
+    @JsonIgnore
+    @Transient
+    private String conectedTo;
+
+    @JsonIgnore
+    @Transient
+    private String tipoPeriferico;
+
+    @JsonIgnore
+    @Transient
+    private String noSeriePeriferico;
+
+    @JsonIgnore
+    @Transient
+    private String fechaConFormato;
+    @PostLoad
+    public void generate() {
+        if(conectadoA.getNoSerie() == null){
+            conectedTo = "Ahorita no hay";
+        }else {
+            conectedTo = conectadoA.getNoSerie();
+        }
+        locacionActual = locacion.getDireccion();
+        tipoPeriferico = periferico.getTipoPerifericos().toString();
+        noSeriePeriferico = periferico.getNoSerie();
+        fechaConFormato = fechaRegistro.toString();
+    }
 }

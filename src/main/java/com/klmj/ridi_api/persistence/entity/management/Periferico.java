@@ -1,5 +1,6 @@
 package com.klmj.ridi_api.persistence.entity.management;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,4 +23,7 @@ public class Periferico extends Dispositivo{
     @JsonManagedReference
     @OneToMany(mappedBy = "periferico")
     private List<HistorialPeriferico> historialPeriferico;
+
+
+
 }

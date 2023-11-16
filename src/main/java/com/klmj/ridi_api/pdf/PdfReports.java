@@ -12,7 +12,9 @@ import java.util.Objects;
 @Getter
 public enum PdfReports {
     COMPUTADORAS(Objects.requireNonNull(PdfReports.class.getClassLoader().getResource("pdf/ReporteComputadoras.jrxml"))),
-    HISTORIAL(Objects.requireNonNull(PdfReports.class.getClassLoader().getResource("pdf/ReporteHistorial.jrxml")));
+    HISTORIAL(Objects.requireNonNull(PdfReports.class.getClassLoader().getResource("pdf/ReporteHistorial.jrxml"))),
+    INCIDENCIAS(Objects.requireNonNull(PdfReports.class.getClassLoader().getResource("pdf/ReporteIncidencias.jrxml"))),
+    HISTORIAL_PERIFERICOS(Objects.requireNonNull(PdfReports.class.getClassLoader().getResource("pdf/ReporteHistorialPerifericos.jrxml")));
 
 
     private final JasperReport report;
