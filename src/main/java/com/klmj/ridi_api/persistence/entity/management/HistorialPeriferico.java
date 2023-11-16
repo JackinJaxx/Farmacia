@@ -40,7 +40,7 @@ public class HistorialPeriferico {
     @Id
     @Min(value = 1, message = "El consecutivo debe ser mayor a 0")
     @Column(name = "cns", nullable = false)
-    private Integer cns;
+    private String cns;
     @Column(name = "fecha_registro", nullable = false)
     private LocalDateTime fechaRegistro;
     @Column(name = "estatus")
@@ -58,7 +58,7 @@ public class HistorialPeriferico {
 
     @JsonIgnore
     @Transient
-    private String locacionActual;
+    private String direccionComputadora;
 
     @JsonIgnore
     @Transient
@@ -82,7 +82,7 @@ public class HistorialPeriferico {
         }else {
             conectedTo = conectadoA.getNoSerie();
         }
-        locacionActual = locacion.getDireccion();
+        direccionComputadora = locacion.getDireccion();
         tipoPeriferico = periferico.getTipoPerifericos().toString();
         noSeriePeriferico = periferico.getNoSerie();
         fechaConFormato = fechaRegistro.toString();
