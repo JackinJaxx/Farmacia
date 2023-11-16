@@ -20,5 +20,5 @@ public class HistorialPerifericoId implements Serializable {
     private Periferico periferico;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private String cns;
+    private Integer cns;
 }

@@ -7,6 +7,7 @@ import com.klmj.ridi_api.persistence.entity.management.embedd.HistorialPeriferic
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
+import java.time.format.DateTimeFormatter;
 
 import java.time.LocalDateTime;
 
@@ -40,7 +41,7 @@ public class HistorialPeriferico {
     @Id
     @Min(value = 1, message = "El consecutivo debe ser mayor a 0")
     @Column(name = "cns", nullable = false)
-    private String cns;
+    private Integer cns;
     @Column(name = "fecha_registro", nullable = false)
     private LocalDateTime fechaRegistro;
     @Column(name = "estatus")
@@ -75,6 +76,7 @@ public class HistorialPeriferico {
     @JsonIgnore
     @Transient
     private String fechaConFormato;
+
     @PostLoad
     public void generate() {
         if(conectadoA.getNoSerie() == null){
@@ -82,9 +84,11 @@ public class HistorialPeriferico {
         }else {
             conectedTo = conectadoA.getNoSerie();
         }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
         direccionComputadora = locacion.getDireccion();
-        tipoPeriferico = periferico.getTipoPerifericos().toString();
+        tipoPeriferico = periferico.getTipoPerifericos().getDescripcion();
         noSeriePeriferico = periferico.getNoSerie();
-        fechaConFormato = fechaRegistro.toString();
+        fechaConFormato = fechaRegistro.format(formatter);
     }
 }
