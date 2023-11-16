@@ -76,7 +76,7 @@ public class HistorialComputadora implements Serializable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         nombreComputadora = computadora.getNombreSistema();
-        direccionComputadora = computadora.getLocacionActual();
+        direccionComputadora = locacion.getNombre();
         noSerieComputadora = computadora.getNoSerie();
         fechaConFormato = fechaRegistro.format(formatter);
     }

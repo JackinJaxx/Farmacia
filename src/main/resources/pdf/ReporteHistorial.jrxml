@@ -61,8 +61,8 @@
 			</image>
 			<textField pattern="dd&apos; de &apos;MMMM&apos; del &apos;yyyy">
 				<reportElement x="390" y="50" width="160" height="30" uuid="1aeee942-c2c2-4494-9a40-a1fe3feb0c42"/>
-				<textElement>
-					<font size="9"/>
+				<textElement textAlignment="Center" rotation="None" markup="html">
+					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
