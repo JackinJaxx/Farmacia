@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,8 +28,10 @@ import java.util.List;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario", nullable = false)
+    @Column(name = "id_usuario")
     private Long id;
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
     @Column(name = "correo_electronico", nullable = false, unique = true)
     private String correo;
     @Column(name = "no_telefono", nullable = false)
@@ -37,7 +40,7 @@ public class Usuario {
     private String nombres;
     @Column(name = "apellido_p", nullable = false)
     private String apellido_p;
-    @Column(name = "apellido_m", nullable = false)
+    @Column(name = "apellido_m")
     private String apellido_m;
     @Column(name = "password", nullable = false)
     private String password;
@@ -46,8 +49,8 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Grupo grupo = Grupo.BASIC_USER;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(mappedBy = "encargados")
-    private List<Incidencia> incidencias;
+    private List<Incidencia> incidencias =  new ArrayList<>();
 
 }

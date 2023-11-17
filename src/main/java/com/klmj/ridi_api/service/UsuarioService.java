@@ -97,7 +97,6 @@ public class UsuarioService extends PersistenceService<Usuario, Long> {
             String salt = usuarioDB.get().getSalt();
             String hashedPassword = hashPasswordWithSalt(passwordTemp, salt);
             user.setPassword(hashedPassword);
-
             return super.siExiste(user);
         }
         return false;
