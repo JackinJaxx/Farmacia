@@ -34,11 +34,11 @@
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
-		<field name="id" class="java.lang.String"/>
+		<field name="idd" class="java.lang.String"/>
 		<field name="descripcion" class="java.lang.String"/>
 		<field name="fechaConInicio" class="java.lang.String"/>
 		<field name="fechaConSolucion" class="java.lang.String"/>
-		<field name="estatus" class="java.lang.String"/>
+		<field name="estatusIncidencia" class="java.lang.String"/>
 		<field name="encargadoActual" class="java.lang.String"/>
 		<field name="noSerieDispositivo" class="java.lang.String"/>
 	</subDataset>
@@ -98,11 +98,11 @@
 					<datasetRun subDataset="dsReporteIncidencias" uuid="e010fd16-b2d9-47bf-a15e-2bbc833f7177">
 						<dataSourceExpression><![CDATA[$P{ds}]]></dataSourceExpression>
 					</datasetRun>
-					<jr:column width="70" uuid="b9f8e353-4bb0-41f5-ba89-475f2f61e864">
+					<jr:column width="50" uuid="b9f8e353-4bb0-41f5-ba89-475f2f61e864">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:columnHeader style="Table_CH" height="50" rowSpan="1">
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="70" height="50" backcolor="#21929E" uuid="d447ab07-af5e-4419-b84e-253e7f8b60a9"/>
+								<reportElement mode="Opaque" x="0" y="0" width="50" height="50" backcolor="#21929E" uuid="d447ab07-af5e-4419-b84e-253e7f8b60a9"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -111,9 +111,9 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="70" height="30" uuid="21e8dc63-96f7-4256-a77a-efbdef077873"/>
+								<reportElement x="0" y="0" width="50" height="30" uuid="21e8dc63-96f7-4256-a77a-efbdef077873"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{idd}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -136,11 +136,11 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="80" uuid="0b9611c5-7e38-41e8-bf60-afe29b6edfd8">
+					<jr:column width="100" uuid="0b9611c5-7e38-41e8-bf60-afe29b6edfd8">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:columnHeader style="Table_CH" height="50" rowSpan="1">
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="80" height="50" backcolor="#21929E" uuid="533fe053-c334-4468-b850-848a0e01a2ed"/>
+								<reportElement mode="Opaque" x="0" y="0" width="100" height="50" backcolor="#21929E" uuid="533fe053-c334-4468-b850-848a0e01a2ed"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -149,7 +149,7 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="80" height="30" uuid="bc6106ae-ba30-401f-9eeb-10e574bbea3a"/>
+								<reportElement x="0" y="0" width="100" height="30" uuid="bc6106ae-ba30-401f-9eeb-10e574bbea3a"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{fechaConInicio}]]></textFieldExpression>
 							</textField>
@@ -174,11 +174,11 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="50" uuid="18be6571-e539-419b-81e0-948bc3bc3728">
+					<jr:column width="60" uuid="18be6571-e539-419b-81e0-948bc3bc3728">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:columnHeader style="Table_CH" height="50" rowSpan="1">
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="50" height="50" backcolor="#21929E" uuid="beb6467a-63f3-41d4-b121-b93112e2c81d"/>
+								<reportElement mode="Opaque" x="0" y="0" width="60" height="50" backcolor="#21929E" uuid="beb6467a-63f3-41d4-b121-b93112e2c81d"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -187,9 +187,9 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="50" height="30" uuid="0415605c-3a97-4465-9887-4a31c5108b62"/>
+								<reportElement x="0" y="0" width="60" height="30" uuid="0415605c-3a97-4465-9887-4a31c5108b62"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{estatusIncidencia}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -212,11 +212,11 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="80" uuid="685e0da5-6109-43b0-8cca-14d91cdb4546">
+					<jr:column width="70" uuid="685e0da5-6109-43b0-8cca-14d91cdb4546">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
 						<jr:columnHeader style="Table_CH" height="50" rowSpan="1">
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="80" height="50" backcolor="#21929E" uuid="40f1d4d7-34ed-4031-a45e-459b1a991a76"/>
+								<reportElement mode="Opaque" x="0" y="0" width="70" height="50" backcolor="#21929E" uuid="40f1d4d7-34ed-4031-a45e-459b1a991a76"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -225,7 +225,7 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="80" height="30" uuid="af4c2094-4cf3-41df-875e-47b61dc43f00"/>
+								<reportElement x="0" y="0" width="70" height="30" uuid="af4c2094-4cf3-41df-875e-47b61dc43f00"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{encargadoActual}]]></textFieldExpression>
 							</textField>

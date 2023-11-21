@@ -15,7 +15,7 @@ public class TipoPeriferico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tipo", nullable = false) // Especifica el nombre de la columna en la base de datos
-    private long id;
+    private Long id;
     @Column(nullable = false)
     private String descripcion;
 }

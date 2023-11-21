@@ -66,11 +66,6 @@ public class HistorialComputadora implements Serializable {
     @Transient
     private String fechaConFormato;
 
-    public void setFechaConFormato(String fechaConFormato) {
-        this.fechaConFormato = fechaConFormato;
-        this.fechaRegistro = LocalDateTime.parse(fechaConFormato, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-    }
-
     @PostLoad
     public void generate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

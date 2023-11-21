@@ -73,6 +73,10 @@ public class Incidencia {
 
     @JsonIgnore
     @Transient
+    private String idd;
+
+    @JsonIgnore
+    @Transient
     private String fechaConInicio;
 
     @JsonIgnore
@@ -82,21 +86,28 @@ public class Incidencia {
     @JsonIgnore
     @Transient
     private String noSerieDispositivo;
+
+    @JsonIgnore
+    @Transient
+    private String estatusIncidencia;
     @PostLoad
     public void generete(){
         for (Usuario usuario : this.getEncargados()) {
-            encargadoActual = usuario.getNombres(); // o usuario.nombre si es un campo público
+            encargadoActual = usuario.getNombres();
         }
 
         if (fechaSolucion != null) {
                 fechaConSolucion = fechaSolucion.toString();
         } else {
             // La cadena es null, asigna un valor predeterminado especial
-            fechaConSolucion = "Proximamente";  // O cualquier otro valor especial que desees
+            fechaConSolucion = "Proximamente";
         }
-          fechaInicio = LocalDateTime.parse(fechaConInicio, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-        fechaConInicio = fechaInicio.toString();
+          idd = id.toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        fechaConInicio = fechaInicio.format(formatter);
         noSerieDispositivo = dispositivo.getNoSerie();
+        estatusIncidencia = estatus.toString();
 
     }
 
