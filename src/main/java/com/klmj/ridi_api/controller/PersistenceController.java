@@ -34,8 +34,9 @@ public abstract class PersistenceController<T, ID> {
     @PostMapping(produces = "application/json", value = "/auth")
     public ResponseEntity<Usuario> autenticar(@RequestBody T t) {
         logger.info("Petición Post a las %s".formatted(LocalDateTime.now()));
-
+        logger.info("Usuario a autenticar: %s".formatted(t));
         if (!service.siExiste(t)){
+            logger.info("Usuario no autenticado" + t);
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 

@@ -2,6 +2,7 @@ package com.klmj.ridi_api.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,7 +23,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"correo", "no_telefono", "nombres", "apellido_p", "apellido_m", "password",  "salt","grupo", "incidencias"})
+@EqualsAndHashCode(exclude = {"correo", "no_telefono", "nombres", "apellido_p", "apellido_m", "password", "salt", "grupo"})
 
 @Entity(name = "usuarios")
 public class Usuario {
@@ -30,7 +31,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
     private Long id;
-    @Column(name = "username", unique = true)
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
     @Column(name = "correo_electronico", nullable = false, unique = true)
     private String correo;
@@ -44,13 +45,10 @@ public class Usuario {
     private String apellido_m;
     @Column(name = "password", nullable = false)
     private String password;
+    @JsonIgnore
     @Column(name = "salt")
     private String salt;
     @Enumerated(EnumType.STRING)
-    private Grupo grupo = Grupo.BASIC_USER;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "encargados")
-    private List<Incidencia> incidencias =  new ArrayList<>();
+    private Grupo grupo;
 
 }

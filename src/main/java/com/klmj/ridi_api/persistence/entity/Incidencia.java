@@ -2,6 +2,7 @@ package com.klmj.ridi_api.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.klmj.ridi_api.persistence.entity.management.Dispositivo;
 import jakarta.persistence.*;
@@ -116,6 +117,9 @@ public class Incidencia {
     }
 
     public String getFechaSolucion(){
+        if(fechaSolucion == null){
+            return "Proximamente";
+        }
         return this.fechaSolucion.toString();
     }
 }
