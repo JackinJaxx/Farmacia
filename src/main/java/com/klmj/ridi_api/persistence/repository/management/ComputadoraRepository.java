@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Qualifier("computadoraRep")
 @Repository
 public interface ComputadoraRepository extends DispositivoRepository<Computadora> {
+    Computadora findByNoSerie(String noSerie);
 }

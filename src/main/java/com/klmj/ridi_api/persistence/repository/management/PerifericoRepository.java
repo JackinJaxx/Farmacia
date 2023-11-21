@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Qualifier("perifericoRep")
 @Repository
 public interface PerifericoRepository extends DispositivoRepository<Periferico> {
+    Periferico findByNoSerie(String noSerie);
 }

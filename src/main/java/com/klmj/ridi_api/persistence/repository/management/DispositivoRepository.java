@@ -1,6 +1,7 @@
 package com.klmj.ridi_api.persistence.repository.management;
 
 import com.klmj.ridi_api.persistence.entity.management.Dispositivo;
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

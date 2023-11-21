@@ -1,7 +1,7 @@
 package com.klmj.ridi_api.persistence.entity.management;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.klmj.ridi_api.persistence.entity.management.converter.TiposPerifericoConverter;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,15 +15,12 @@ import java.util.List;
 
 @Entity(name = "perifericos")
 @PrimaryKeyJoinColumn(name = "serial_periferico")
-public class Periferico extends Dispositivo{
-    @ManyToOne
-    @JoinColumn(name = "id_tipo", nullable = false)
-    private TipoPeriferico tipoPerifericos;
-
+public class Periferico extends Dispositivo {
+    @Column(nullable = false)
+    private String tipo;
+    private String descripcion;
+    private String nombre;
     @JsonManagedReference
     @OneToMany(mappedBy = "periferico")
-    private List<HistorialPeriferico> historialPeriferico;
-
-
-
+    private List<HistorialPeriferico> historial;
 }

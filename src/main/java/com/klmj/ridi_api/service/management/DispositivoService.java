@@ -5,6 +5,7 @@ import com.klmj.ridi_api.persistence.repository.management.DispositivoRepository
 import com.klmj.ridi_api.service.PdfService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 
 import java.util.Objects;
 /**
@@ -14,6 +15,7 @@ import java.util.Objects;
  */
 public abstract class DispositivoService <D extends Dispositivo> extends PdfService<D, Long> {
 
+    protected DispositivoRepository<Dispositivo> dispositivoRepository;
     protected DispositivoRepository<D> repository;
 
     /**
@@ -27,16 +29,26 @@ public abstract class DispositivoService <D extends Dispositivo> extends PdfServ
         this.repository = repository;
     }
 
+    @Autowired
+    public void setDispositivoRepository(DispositivoRepository<Dispositivo> dispositivoRepository) {
+        this.dispositivoRepository = dispositivoRepository;
+    }
+
     /**
      * Guarda una entidad `Dispositivo`.
      *
      * @param d La entidad `Dispositivo` a guardar.
      * @return La entidad `Dispositivo` guardada.
-     * @throws DispositivoExistenteException Si existe una entidad `Dispositivo` con el mismo `noSerie`.
      */
     @Override
     public D guardar(@NotNull D d) {
         var sD = repository.findByNoSerie(d.getNoSerie());
-        return (Objects.isNull(sD)) ? super.guardar(d) : sD;
+        if (Objects.isNull(sD)) return super.guardar(d);
+        System.out.println(sD.getNoSerie() + "****************************");
+        return sD;
+    }
+
+    public D leerPorNoSerie(@NotNull String noSerie) {
+        return repository.findByNoSerie(noSerie);
     }
 }

@@ -28,6 +28,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(exclude = {"fechaRegistro", "estatus", "locacion", "conectadoA"})
 
 @Entity(name = "historial_periferico")
+@Table
 @IdClass(HistorialPerifericoId.class)
 public class HistorialPeriferico {
     @JsonBackReference
@@ -39,7 +40,7 @@ public class HistorialPeriferico {
             nullable = false)
     private Periferico periferico;
     @Id
-    @Min(value = 1, message = "El consecutivo debe ser mayor a 0")
+    //@Min(value = 1, message = "El consecutivo debe ser mayor a 0")
     @Column(name = "cns", nullable = false)
     private Integer cns;
     @Column(name = "fecha_registro", nullable = false)
@@ -56,39 +57,37 @@ public class HistorialPeriferico {
     @JoinColumn(name = "conectado_a")
     private Computadora conectadoA;
 
-
+    @Transient
+    private String fechaConFormato;
     @JsonIgnore
     @Transient
     private String direccionComputadora;
-
     @JsonIgnore
     @Transient
-    private String conectedTo;
-
+    private String noSerieConectadoA;
     @JsonIgnore
     @Transient
     private String tipoPeriferico;
-
     @JsonIgnore
     @Transient
     private String noSeriePeriferico;
 
     @JsonIgnore
     @Transient
-    private String fechaConFormato;
+    private String conectedTo;
+
+    public void setFechaConFormato(String fechaConFormato) {
+        this.fechaConFormato = fechaConFormato;
+        this.fechaRegistro = LocalDateTime.parse(fechaConFormato, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+    }
 
     @PostLoad
     public void generate() {
-        if(conectadoA.getNoSerie() == null){
-            conectedTo = "Ahorita no hay";
-        }else {
-            conectedTo = conectadoA.getNoSerie();
-        }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-        direccionComputadora = locacion.getDireccion();
-        tipoPeriferico = periferico.getTipoPerifericos().getDescripcion();
+        noSerieConectadoA = (conectadoA == null) ? "SIN REGISTRO" : conectadoA.getNoSerie();
+        direccionComputadora = (locacion == null) ? "SIN LOCACION" : locacion.getNombre();
+        tipoPeriferico = periferico.getTipo();
         noSeriePeriferico = periferico.getNoSerie();
-        fechaConFormato = fechaRegistro.format(formatter);
+        conectedTo = (conectadoA != null) ? conectadoA.getNombreSistema() : "DESCONECTADO";
+        fechaConFormato = fechaRegistro.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }

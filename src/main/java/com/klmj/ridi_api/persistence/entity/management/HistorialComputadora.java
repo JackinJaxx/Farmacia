@@ -38,7 +38,7 @@ public class HistorialComputadora implements Serializable {
     @JoinColumn(referencedColumnName = "serial_computadora", name = "serial_computadora", nullable = false)
     private Computadora computadora;
     @Id
-    @Min(value = 1, message = "El consecutivo debe de ser mayor a 0")
+    //@Min(value = 1, message = "El consecutivo debe de ser mayor a 0")
     @Column(name = "cns", nullable = false)
     private Integer cns;
     @Column(name = "fecha_registro", nullable = false )
@@ -62,7 +62,6 @@ public class HistorialComputadora implements Serializable {
     @JsonIgnore
     @Transient
     private String noSerieComputadora;
-    @JsonIgnore
     @Transient
     private String fechaConFormato;
 

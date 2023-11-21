@@ -105,8 +105,8 @@ public class ComputadoraService extends DispositivoService<Computadora> {
     public JasperPrint generateReport(@NotNull List<Computadora> ms, @NotNull PdfReports report) throws JRException {
         Map<String, Object> params = new HashMap<>();
 
-        params.put("ds", new JRBeanCollectionDataSource(ms));
         params.put("LogoRIDI", ImagesResources.LOGO_RIDI.getIcono());
+        params.put("ds", new JRBeanCollectionDataSource(ms));
 
         return JasperFillManager.fillReport(
                 report.getReport(), params, new JRBeanCollectionDataSource(ms));

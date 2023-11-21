@@ -25,7 +25,8 @@ public abstract class PdfService<T, ID> extends PersistenceService<T, ID> implem
             JpaRepository<T, ID> repository) {
         super(repository);
     }
-    /**Exporta una lista de entidades a un informe PDF.
+    /**
+     * Exporta una lista de entidades a un informe PDF.
      * @param data La lista de entidades que se va a informar.
      * @param report La plantilla de informe PDF a utilizar.
      * @return Un array de bytes que contiene los datos del informe PDF.
@@ -36,11 +37,12 @@ public abstract class PdfService<T, ID> extends PersistenceService<T, ID> implem
         return JasperExportManager.exportReportToPdf(generateReport(data, report));
     }
 
-/**Genera un `JasperPrint` a partir de una lista de entidades y una plantilla de informe PDF.
- * @param ms La lista de entidades que se va a informar.
- * @param report La plantilla de informe PDF a utilizar.
- * @return Un objeto `JasperPrint` que representa el informe.
-    **/
+    /**
+     * Genera un `JasperPrint` a partir de una lista de entidades y una plantilla de informe PDF.
+     * @param ms La lista de entidades que se va a informar.
+     * @param report La plantilla de informe PDF a utilizar.
+     * @return Un objeto `JasperPrint` que representa el informe.
+     */
     public abstract JasperPrint generateReport(@NotNull List<T> ms, @NotNull PdfReports report) throws JRException;
 
 }

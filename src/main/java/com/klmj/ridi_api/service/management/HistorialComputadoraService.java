@@ -5,10 +5,8 @@ import com.klmj.ridi_api.pdf.PdfReports;
 import com.klmj.ridi_api.persistence.entity.management.HistorialComputadora;
 import com.klmj.ridi_api.persistence.entity.management.embedd.HistorialComputadoraId;
 import com.klmj.ridi_api.persistence.repository.management.HistorialComputadoraRepository;
-import com.klmj.ridi_api.service.PdfReportService;
-import com.klmj.ridi_api.service.PersistenceService;
+import com.klmj.ridi_api.service.PdfService;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -23,7 +21,7 @@ import java.util.Objects;
 
 @Service
 public class HistorialComputadoraService extends
-        PersistenceService<HistorialComputadora, HistorialComputadoraId> implements PdfReportService<HistorialComputadora> {
+        PdfService<HistorialComputadora, HistorialComputadoraId> {
 
     protected HistorialComputadoraRepository repository;
 
@@ -55,12 +53,6 @@ public class HistorialComputadoraService extends
      */
     public List<HistorialComputadora> leerPorComputadora(long serialComputadora) {
         return repository.findByComputadora_Serial(serialComputadora);
-    }
-
-
-    @Override
-    public byte[] exportPdf(@NotNull List<HistorialComputadora> data, @NotNull PdfReports report) throws JRException {
-        return JasperExportManager.exportReportToPdf(generateReport(data, report));
     }
 
     @Override
