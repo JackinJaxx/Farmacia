@@ -28,7 +28,10 @@ public enum ImagesResources {
                     "pdf/images/CPU.png"))),
     RAM(Objects.requireNonNull(
             ImagesResources.class.getClassLoader().getResourceAsStream(
-                    "pdf/images/RAM.png")));
+                    "pdf/images/RAM.png"))),
+    LogoRIDI_F(Objects.requireNonNull(
+            ImagesResources.class.getClassLoader().getResourceAsStream(
+                    "pdf/images/LogoRIDI_F.png")));
 
     private final InputStream icono;
 

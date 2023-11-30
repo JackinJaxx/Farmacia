@@ -7,9 +7,7 @@ import com.klmj.ridi_api.persistence.repository.management.ComputadoraRepository
 import com.klmj.ridi_api.service.management.component.CPUService;
 import com.klmj.ridi_api.service.management.component.DiscoDuroService;
 import com.klmj.ridi_api.service.management.component.RAMService;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.jetbrains.annotations.NotNull;
@@ -107,8 +105,9 @@ public class ComputadoraService extends DispositivoService<Computadora> {
 
         params.put("LogoRIDI", ImagesResources.LOGO_RIDI.getIcono());
         params.put("ds", new JRBeanCollectionDataSource(ms));
+        JRDataSource vacio = new JREmptyDataSource(1);
 
         return JasperFillManager.fillReport(
-                report.getReport(), params, new JRBeanCollectionDataSource(ms));
+                report.getReport(), params, vacio);
     }
 }

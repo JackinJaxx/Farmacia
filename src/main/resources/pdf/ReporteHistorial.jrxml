@@ -44,6 +44,7 @@
 	<parameter name="LogoRIDI" class="java.io.InputStream"/>
 	<parameter name="ds" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="imagePath" class="java.io.InputStream"/>
+	<parameter name="LogoRIDI_F" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -61,8 +62,8 @@
 			</image>
 			<textField pattern="dd&apos; de &apos;MMMM&apos; del &apos;yyyy">
 				<reportElement x="390" y="50" width="160" height="30" uuid="1aeee942-c2c2-4494-9a40-a1fe3feb0c42"/>
-				<textElement textAlignment="Center" rotation="None" markup="html">
-					<font isBold="true"/>
+				<textElement>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
@@ -90,9 +91,9 @@
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="270" splitType="Stretch">
+		<band height="285" splitType="Stretch">
 			<componentElement>
-				<reportElement x="0" y="20" width="550" height="210" uuid="202e2d5f-fd9f-4881-99d3-41de1ec7c8e5">
+				<reportElement x="0" y="20" width="550" height="130" uuid="202e2d5f-fd9f-4881-99d3-41de1ec7c8e5">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -220,4 +221,13 @@
 			</componentElement>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="50">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<image>
+				<reportElement x="490" y="0" width="50" height="50" uuid="c537c6dd-e601-4b36-bab3-63ae0ea12394"/>
+				<imageExpression><![CDATA[$P{LogoRIDI_F}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
 </jasperReport>

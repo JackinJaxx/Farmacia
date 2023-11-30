@@ -6,9 +6,7 @@ import com.klmj.ridi_api.persistence.entity.management.HistorialComputadora;
 import com.klmj.ridi_api.persistence.entity.management.embedd.HistorialComputadoraId;
 import com.klmj.ridi_api.persistence.repository.management.HistorialComputadoraRepository;
 import com.klmj.ridi_api.service.PdfService;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +59,14 @@ public class HistorialComputadoraService extends
 
         params.put("ds", new JRBeanCollectionDataSource(ms));
         params.put("LogoRIDI", ImagesResources.LOGO_RIDI.getIcono());
+        params.put("LogoRIDI_F", ImagesResources.LogoRIDI_F.getIcono());
 
+        JRDataSource vacio = new JREmptyDataSource(2);
+        /**
+         * Esta madre sirve para que no
+         * genere pdf vacios al final
+        **/
         return JasperFillManager.fillReport(
-                report.getReport(), params, new JRBeanCollectionDataSource(ms));
+                report.getReport(), params, vacio);
     }
 }

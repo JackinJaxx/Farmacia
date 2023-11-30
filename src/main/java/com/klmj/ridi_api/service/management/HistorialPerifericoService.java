@@ -7,9 +7,7 @@ import com.klmj.ridi_api.persistence.entity.management.embedd.HistorialPeriferic
 import com.klmj.ridi_api.persistence.repository.management.HistorialPerifericoRepository;
 import com.klmj.ridi_api.service.PdfService;
 import com.klmj.ridi_api.service.PersistenceService;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +53,8 @@ public class HistorialPerifericoService extends
 
         params.put("LogoRIDI", ImagesResources.LOGO_RIDI.getIcono());
         params.put("ds", new JRBeanCollectionDataSource(ms));
-
+        JRDataSource vacio = new JREmptyDataSource(1);
         return JasperFillManager.fillReport(
-                report.getReport(), params, new JRBeanCollectionDataSource(ms));
+                report.getReport(), params, vacio);
     }
 }
