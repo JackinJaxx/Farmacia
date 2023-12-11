@@ -46,6 +46,7 @@
 	<parameter name="ds" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource">
 		<defaultValueExpression><![CDATA[$P{ds}]]></defaultValueExpression>
 	</parameter>
+	<parameter name="LogoRIDI_F" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -86,9 +87,9 @@
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="304" splitType="Stretch">
+		<band height="323" splitType="Stretch">
 			<componentElement>
-				<reportElement x="0" y="30" width="570" height="200" uuid="7d210edb-40bb-4cb5-aef9-7710d0aa91cf">
+				<reportElement x="0" y="30" width="570" height="293" uuid="7d210edb-40bb-4cb5-aef9-7710d0aa91cf">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -235,4 +236,12 @@
 			</componentElement>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="50">
+			<image>
+				<reportElement x="490" y="0" width="50" height="50" uuid="b4097f4e-d32a-4d6c-bc31-75eaadfd00c0"/>
+				<imageExpression><![CDATA[$P{LogoRIDI_F}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
 </jasperReport>
