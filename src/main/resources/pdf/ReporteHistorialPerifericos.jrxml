@@ -220,4 +220,12 @@
 			</componentElement>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="52">
+			<image>
+				<reportElement x="520" y="0" width="50" height="50" uuid="531f8868-5a58-4905-ad89-6619912a7d10"/>
+				<imageExpression><![CDATA[$P{LogoRIDI_F}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
 </jasperReport>
