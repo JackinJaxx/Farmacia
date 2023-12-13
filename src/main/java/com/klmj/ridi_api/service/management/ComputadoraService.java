@@ -1,5 +1,6 @@
 package com.klmj.ridi_api.service.management;
 
+import com.klmj.ridi_api.pdf.ImageUtils;
 import com.klmj.ridi_api.pdf.ImagesResources;
 import com.klmj.ridi_api.pdf.PdfReports;
 import com.klmj.ridi_api.persistence.entity.management.Computadora;
@@ -7,9 +8,7 @@ import com.klmj.ridi_api.persistence.repository.management.ComputadoraRepository
 import com.klmj.ridi_api.service.management.component.CPUService;
 import com.klmj.ridi_api.service.management.component.DiscoDuroService;
 import com.klmj.ridi_api.service.management.component.RAMService;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.jetbrains.annotations.NotNull;
@@ -17,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,11 +105,25 @@ public class ComputadoraService extends DispositivoService<Computadora> {
     @Override
     public JasperPrint generateReport(@NotNull List<Computadora> ms, @NotNull PdfReports report) throws JRException {
         Map<String, Object> params = new HashMap<>();
+        InputStream logoRIDIStream = null;
+        InputStream logoPieStream = null;
+        try {
+            logoRIDIStream = ImageUtils.openImage("pdf/images/LogoRIDI.png");
+            logoPieStream= ImageUtils.openImage("pdf/images/LogoPie.png");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        params.put("LogoRIDI", ImagesResources.LOGO_RIDI.getIcono());
+
+        params.put("LogoRIDI", logoRIDIStream);
+        params.put("LogoPie", logoPieStream);
         params.put("ds", new JRBeanCollectionDataSource(ms));
-
+        JRDataSource vacio = new JREmptyDataSource(1);
+        /**
+         * Esta madre sirve para que no
+         * genere pdf vacios al final
+         **/
         return JasperFillManager.fillReport(
-                report.getReport(), params, new JRBeanCollectionDataSource(ms));
+                report.getReport(), params, vacio);
     }
 }

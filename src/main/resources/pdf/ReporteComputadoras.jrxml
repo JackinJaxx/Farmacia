@@ -45,6 +45,7 @@
 	<parameter name="LogoRIDI" class="java.io.InputStream"/>
 	<parameter name="ds" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="imagePath" class="java.io.InputStream"/>
+	<parameter name="LogoPie" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -237,4 +238,12 @@
 			</componentElement>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="51">
+			<image>
+				<reportElement x="510" y="0" width="50" height="50" uuid="70880236-3143-4651-8c0f-e5581fbe67df"/>
+				<imageExpression><![CDATA[$P{LogoPie}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
 </jasperReport>

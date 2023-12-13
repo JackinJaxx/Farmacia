@@ -1,5 +1,6 @@
 package com.klmj.ridi_api.controller;
 
+import com.klmj.ridi_api.pdf.ImageUtils;
 import com.klmj.ridi_api.pdf.PdfReports;
 import com.klmj.ridi_api.persistence.entity.Incidencia;
 import com.klmj.ridi_api.service.IncidenciaService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.InputStream;
 import java.time.LocalDateTime;
 
 import static com.klmj.ridi_api.controller.PdfController.createHeader;
@@ -27,6 +29,10 @@ public class IncidenciaController extends PersistenceController<Incidencia, Long
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/pdf")
     public ResponseEntity<byte[]> exportPdf() {
+        InputStream logoRIDIStream = getClass().getResourceAsStream("pdf/images/LogoRIDI.png");
+        ImageUtils.closeImage(logoRIDIStream);
+        InputStream logoPieStream = getClass().getResourceAsStream("pdf/images/LogoPie.png");
+        ImageUtils.closeImage(logoPieStream);
         try {
             return ResponseEntity.ok()
                     .headers(createHeader("ReporteIncidencias", "reporte-incidencias"))
